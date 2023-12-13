@@ -109,21 +109,40 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\chitietsudungdv.cs" />
+    <Compile Include="Models\chitietsudungtb.cs" />
+    <Compile Include="Models\datphong.cs" />
+    <Compile Include="Models\dichvu.cs" />
+    <Compile Include="Models\doiphong.cs" />
+    <Compile Include="Models\hoadon.cs" />
+    <Compile Include="Models\khachhang.cs" />
+    <Compile Include="Models\khachsan.cs" />
+    <Compile Include="Models\loaiphong.cs" />
+    <Compile Include="Models\nhanvien.cs" />
+    <Compile Include="Models\phong.cs" />
+    <Compile Include="Models\quyen.cs" />
     <Compile Include="Models\ResortDBContext.cs" />
+    <Compile Include="Models\ThaoTacDatPhong.cs" />
+    <Compile Include="Models\thietbi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -133,7 +152,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
