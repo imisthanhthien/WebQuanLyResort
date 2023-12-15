@@ -1,0 +1,267 @@
+﻿@model WebQuanLyResort.Models.phong
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPageChiTiet.cshtml";
+}
+@{
+    ViewBag.date = 0;
+}
+<div class="row">
+    <div class="col-4">
+
+    </div>
+    <div class="col-4">
+        <div class="d-flex justify-content-center">
+            <h1 class="text-uppercase">@Model.loaiphong.ten_loai</h1>
+        </div>
+        <div class="d-flex justify-content-center">
+            <p>@Model.MoTa</p>
+        </div>
+        <div class="d-flex justify-content-center">
+            <p>@Model.loaiphong.gia.ToString("C")</p>
+        </div>
+        <div class="row">
+            <div class="d-flex justify-content-center mb-3">
+                Ngày
+            </div>
+            <div class="col-12">
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <input class="form-control" type="date" id="dateInput" name="name" value="" />
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                var today = new Date();
+                                var dd = String(today.getDate()).padStart(2, '0');
+                                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                var yyyy = today.getFullYear();
+
+                                today = yyyy + '-' + mm + '-' + dd;
+                                document.getElementById("dateInput").value = today;
+                            });
+                        </script>
+                    </div>
+                    <div class="col-6">
+                        <input class="form-control" type="date" id="dateInput2" name="name" value="" onchange="calculateDateDifference()" />
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                var today = new Date();
+                                var dd = String(today.getDate()).padStart(2, '0');
+                                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                var yyyy = today.getFullYear();
+
+                                today = yyyy + '-' + mm + '-' + dd;
+                                document.getElementById("dateInput2").min = today;
+                            });
+
+
+                        </script>
+                        <!-- Phần JavaScript -->
+
+                        <script>
+                            function calculateDateDifference() {
+                                var date1 = document.getElementById("dateInput").value;
+                                var date2 = document.getElementById("dateInput2").value;
+
+                                var diffInMilliseconds = Math.abs(new Date(date2) - new Date(date1));
+                                var diffInDays = Math.ceil(diffInMilliseconds / (1000 * 60 * 60 * 24));
+
+                                document.getElementById("result").innerText = @(Model.loaiphong.gia * 0.75)+ "(đặt cọc 75%)" + " x " + diffInDays + " day";
+                                document.getElementById("tien").innerText = @(Model.loaiphong.gia * 0.75) * diffInDays;
+                                document.getElementById("tong").innerText = @(Model.loaiphong.gia * 0.75) * diffInDays;
+                                document.getElementById("booking").style.display = "flex";
+                                ViewBag.date = @(Model.loaiphong.gia * 0.75) * diffInDays;
+                            }
+                        </script>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="" style="text-align:center">
+                Số người ở
+            </div>
+        </div>
+        <div class="row p-3">
+            <input type="text" class="form-control" name="name" value="" />
+        </div>
+
+        <div class="row" style="display: none" id="booking">
+            <div class="col-md-6">
+                <span id="result">@(Model.loaiphong.gia * 0.75) x <span id="dateDifference">0</span> day</span>
+            </div>
+            <div class="col-md-6">
+                <span id="tien">@(Model.loaiphong.gia * 0.75) * @ViewBag.date</span>
+            </div>
+            <hr />
+            <div class="col-md-6">
+                Total
+            </div>
+            <div class="col-md-6">
+                <span id="tong"></span>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center mt-3">
+            <a class="btn btn-warning w-100" href="#">Booking</a>
+        </div>
+    </div>
+    <div class="col-4">
+
+    </div>
+</div>
+
+<div class="row p-5">
+    <div class="col-2">
+
+    </div>
+    <div class="col-4">
+        <img class="w-100" src="~/Image/HinhAnh/@Model.HinhAnh.Trim()" alt="Alternate Text" />
+    </div>
+    <div class="col-3">
+        <h4 class="text-success">Mô tả chi tiết</h4>
+        <div class="row">
+            <div class="col-6">
+                Diện tích
+            </div>
+            <div class="col-6">
+                : @Model.DienTich
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                Giường
+            </div>
+            <div class="col-6">
+                : @Model.Giuong
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                Tiêu chuẩn
+            </div>
+            <div class="col-6">
+                : @Model.so_luong_nguoi khách
+            </div>
+        </div>
+
+        <ul>
+            <li>Giá trên đã bao gồm 10% VAT</li>
+            <li>Giá chưa bao gồm 5% phí phục vụ chức ăn trong phòng</li>
+            <li>Check-in: 14:00</li>
+            <li>Check-out: 12:00</li>
+            <li>Giá thay đổi theo từng thời điểm</li>
+            <li>Phụ thu 10% trên giá niêm yết vào giai đoạn lễ 02/09 (01/09-03/09/2023)</li>
+        </ul>
+    </div>
+    <div class="col-3">
+        <h4 class="text-success">Bao gồm</h4>
+        <ul>
+            <li>Ăn sáng</li>
+            <li>Đồ uống chào mừng</li>
+            <li>Trái cây tươi trong phòng</li>
+            <li>Nước suối, trà, cà phê mỗi ngày</li>
+            <li>Miễn phí sử dụng hồ bơi</li>
+            <li>Miễn phí dịch vụ câu cá</li>
+            <li>Miễn phí truy cập internet</li>
+            <li>Miễn phí sử dụng bãi đậu xe</li>
+        </ul>
+    </div>
+    <div class="col-2">
+
+    </div>
+</div>
+@{
+    ViewBag.index = 1;
+}
+<div style="background-color: #f4eddf" class="p-3">
+    <div class="d-flex justify-content-center">
+        <h2 class="text-success mt-5 mb-3">Các loại phòng khác</h2>
+    </div>
+    <div class="d-flex justify-content-center ">
+        <h2 class="text-warning mb-3">Có thể bạn quan tâm</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-2">
+
+        </div>
+        <div class="col-8">
+            <div class="row row-cols-3">
+                @foreach (var item in ViewBag.phong)
+                {
+                    if (ViewBag.index < 4)
+                    {
+                        <div class="col">
+                            <div class="card">
+                                <img src="~/Image/HinhAnh/@item.HinhAnh.Trim()" alt="Alternate Text" />
+                                <div class="card-body">
+                                    <h3 class="text-success">@item.loaiphong.ten_loai</h3>
+                                    <p>@item.loaiphong.gia.ToString("C")</p>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            Diện tích
+                                        </div>
+                                        <div class="col-6">
+                                            : @item.DienTich
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            Giường
+                                        </div>
+                                        <div class="col-6">
+                                            : @item.Giuong
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            Tiêu chuẩn
+                                        </div>
+                                        <div class="col-6">
+                                            : @item.so_luong_nguoi khách
+                                        </div>
+                                    </div>
+                                    <a class="btn btn-warning" href="#">BOOKING</a>
+                                    <a class="btn btn-outline-warning" href="/phong/index?id=@item.id_phong">VIEWMORE</a>
+                                </div>
+                            </div>
+                        </div>
+                        ViewBag.index += 1;
+                    }
+                }
+            </div>
+        </div>
+        <div class="col-2">
+
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var dateInput = document.getElementById("dateInput");
+        var dateInput2 = document.getElementById("dateInput2");
+
+        dateInput.addEventListener("change", calculateDateDifference);
+        dateInput2.addEventListener("change", calculateDateDifference);
+
+        function calculateDateDifference() {
+            var date1 = new Date(dateInput.value);
+            var date2 = new Date(dateInput2.value);
+
+            var timeDifference = Math.abs(date2 - date1);
+            var dateDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+
+            // Cập nhật giá trị cho ViewBag.date
+            ViewBag.date = dateDifference;
+
+            // Hiển thị kết quả
+            var resultElement = document.getElementById("result");
+            resultElement.textContent = "@(Model.loaiphong.gia * 0.75) x " + ViewBag.date + " day";
+        }
+    });
+</script>

@@ -1,27 +1,39 @@
 ﻿<!DOCTYPE html>
+
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Scripts/jquery-3.7.1.min.js" rel="stylesheet" />
+
+    <script src=”https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js”></script>
+    <script src=”https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js”></script>
+    <script src=”https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js”></script>
+
+    <!-- Add Datepicker JS -->
+    <script src=”https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js”></script>
+
+    <!-- Initialize Datepicker with options-->
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             padding: 0;
             margin: 0;
             overflow-x: hidden;
         }
     </style>
-
 </head>
 <body style="font-family: Roboto, sans-serif; line-height: 1.25rem">
     <div class="row p-2 bg-success">
@@ -65,53 +77,13 @@
         </div>
     </div>
 
-    <div class="row pt-5" style="background-color: #d3d3d3; padding-left: 200px; padding-right: 200px">
-        <div class="col-12 d-flex justify-content-center">
-            <h1 class="text-uppercase" style="text-align: center; color: #bb8102">bạn sẽ thật sự hài lòng với không gian riêng tư <br /> và yên tĩnh của nơi này</h1>
-        </div>
-        <div class="col-12 d-flex justify-content-center mt-5 mb-5">
-            <h3 style="text-align: center">Nếu bạn đang tìm kiếm một không gian riêng tư, yên tĩnh để nghỉ ngơi và thư giãn, thì đây là nơi bạn cần đến. Với không gian được thiết kế đẹp mắt và tiện nghi đầy đủ, bạn sẽ cảm thấy thoải mái và hài lòng khi ở đây.</h3>
-        </div>
-    </div>
 
-    <div class="row pt-5" style="padding-left: 200px; padding-right: 200px">
-        <div class="col-12 d-flex justify-content-center">
-            <h1 class="text-uppercase" style="text-align: center; color: #bb8102">Trải nghiệm <br /> Không gian tĩnh lặng, yên bình</h1>
-        </div>
 
-        <div class="col-12 d-flex justify-content-center mt-5 mb-5">
-            <h3 style="text-align: center">Trải nghiệm Không gian tĩnh lặng, yên bình là một trải nghiệm tuyệt vời giúp ta tạm thời thoát khỏi sự ồn ào, hối hả của cuộc sống hiện đại. Tại đây, bạn sẽ được tận hưởng không khí trong lành, nghe những âm thanh êm dịu của thiên nhiên và tìm lại sự tĩnh lặng trong tâm hồn. Đây là cơ hội để bạn nghỉ ngơi, đặt lại tâm trạng và khám phá sự kết nối giữa bạn và tự nhiên. Hãy tìm đến không gian tĩnh lặng để tìm lại sự cân bằng trong cuộc sống của mình.</h3>
-        </div>
-    </div>
-    <div style="padding-left: 200px; padding-right: 200px; background-color: #ffffff ">
+    <div >
         @RenderBody()
     </div>
 
-    <div class="row pt-5" style="padding-left: 200px; padding-right: 200px; background-color: #f4eddf">
-        <div class="col-12 d-flex justify-content-center">
-            <h1 class="text-uppercase" style="text-align: center; color: #bb8102">Phục vụ chu đáo <br /> dịch vụ chuyên nghiệp</h1>
-        </div>
-
-        <div class="col-12 d-flex justify-content-center mt-5 mb-5">
-            <h3 style="text-align: center">Nhằm đáp ứng các yêu cầu của loại hình du lịch MICE (Loại hình du lịch kết hợp hội nghị, hội thảo, triển lãm, tổ chức sự kiện, du lịch khen thưởng) , các phòng họp, phòng hội nghị tại Phuong Nam Resort với sức chứa từ 30 – 300 khách được lắp đặt các trang thiết bị hiện đại cùng với đội ngũ nhân viên chuyên nghiệp, lịch sự chắc chắn sẽ làm cho buổi hội nghị, hội thảo…. của bạn đạt hiệu quả cao và thành công tốt đẹp.</h3>
-        </div>
-
-        <div class="row mb-5">
-            <div class="col-4">
-                <img class="w-100 mt-4" style="height: 400px; box-shadow: 5px 5px 20px 0px lightgray; border-radius: 10px" src="~/Image/Logo/DV1.jpg" alt="Alternate Text" />
-            </div>
-            <div class="col-4">
-                <img class="w-100" style="height: 450px; box-shadow: 5px 5px 20px 0px lightgray; border-radius: 10px" src="~/Image/Logo/DV2.png" alt="Alternate Text" />
-            </div>
-            <div class="col-4">
-                <img class="w-100 mt-4" style="height: 400px; box-shadow: 5px 5px 20px 0px lightgray; border-radius: 10px" src="~/Image/Logo/DV3.png" alt="Alternate Text" />
-            </div>
-        </div>
-
-        <div class="d-flex justify-content-center mb-4">
-            <a class="btn btn-outline-warning" href="#" >XEM TẤT CẢ DỊCH VỤ</a>
-        </div>
-    </div>
+    
 
     <footer class="footer mt-3">
         <div class="container">
