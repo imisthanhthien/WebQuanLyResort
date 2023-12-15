@@ -22,6 +22,7 @@ namespace WebQuanLyResort.Models
         public virtual DbSet<nhanvien> nhanviens { get; set; }
         public virtual DbSet<phong> phongs { get; set; }
         public virtual DbSet<quyen> quyens { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<ThaoTacDatPhong> ThaoTacDatPhongs { get; set; }
         public virtual DbSet<thietbi> thietbis { get; set; }
         public virtual DbSet<chitietsudungdv> chitietsudungdvs { get; set; }
@@ -162,6 +163,14 @@ namespace WebQuanLyResort.Models
 
             modelBuilder.Entity<phong>()
                 .Property(e => e.id_phong)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<phong>()
+                .Property(e => e.DienTich)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<phong>()
+                .Property(e => e.HinhAnh)
                 .IsUnicode(false);
 
             modelBuilder.Entity<phong>()

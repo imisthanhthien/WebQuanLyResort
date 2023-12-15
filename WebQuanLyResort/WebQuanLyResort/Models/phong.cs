@@ -30,6 +30,17 @@ namespace WebQuanLyResort.Models
         [StringLength(30)]
         public string trang_thai { get; set; }
 
+        public string MoTa { get; set; }
+
+        [StringLength(50)]
+        public string DienTich { get; set; }
+
+        [StringLength(100)]
+        public string Giuong { get; set; }
+
+        [StringLength(100)]
+        public string HinhAnh { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<datphong> datphongs { get; set; }
 
