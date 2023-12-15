@@ -171,6 +171,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BookingInfo.cs" />
     <Compile Include="Models\chitietsudungdv.cs" />
     <Compile Include="Models\chitietsudungtb.cs" />
     <Compile Include="Models\datphong.cs" />
@@ -221,6 +222,9 @@
     <Content Include="Views\Phong\Index.cshtml" />
     <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.1.min.map" />
+    <Content Include="Views\Home\TatCaPhong.cshtml" />
+    <Content Include="Views\Phong\Checkout.cshtml" />
+    <Content Include="Views\Phong\DatPhongThanhCong.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
