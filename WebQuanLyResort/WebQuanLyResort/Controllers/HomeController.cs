@@ -16,5 +16,11 @@ namespace WebQuanLyResort.Controllers
             List<phong> phong = db.phongs.ToList();
             return View(phong);
         }
+
+        public ActionResult TatCaPhong()
+        {
+            List<phong> phong = db.phongs.ToList();
+            return View(phong);
+        }
     }
 }

@@ -1,0 +1,73 @@
+﻿@model List<WebQuanLyResort.Models.phong>
+@{
+    ViewBag.Title = "TatCaPhong";
+    Layout = "~/Views/Shared/_LayoutPageChiTiet.cshtml";
+}
+
+<div class="row p-4">
+    <h2 style="text-align: center">Trải nghiệm</h2>
+    <h2 style="text-align: center">Không gian tĩnh lặng, yên bình</h2>
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-8">
+        <p style="text-align:center">Phuong Nam resort đạt tiêu chuẩn 4 sao, khách sạn Phương Nam là khu vực biệt lập gồm hơn 77 phòng với nhiều lối thiết kế khác nhau. Từ những căn nhà đơn lập mang dáng dấp của những ngôi nhà rong, đến ngôi nhà sàn cổ được chế tác thành khu phòng nghỉ tiện nghi và còn có cả khu biệt thự cao cấp sang trọng.</p>
+    </div>
+    <div class="col-md-2">
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-2">
+
+    </div>
+    <div class="col-8">
+        <div class="row row-cols-3">
+            @foreach (var item in Model)
+            {
+
+                <div class="col mb-3">
+                    <div class="card">
+                        <img style="height: 300px" src="~/Image/HinhAnh/@item.HinhAnh.Trim()" alt="Alternate Text" />
+                        <div class="card-body">
+                            <h3 class="text-success">@item.loaiphong.ten_loai</h3>
+                            <p style="color: #b48428">@item.loaiphong.gia.ToString("C")</p>
+                            <div class="row">
+                                <div class="col-6">
+                                    Diện tích
+                                </div>
+                                <div class="col-6">
+                                    : @item.DienTich
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    Giường
+                                </div>
+                                <div class="col-6">
+                                    : @item.Giuong
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    Tiêu chuẩn
+                                </div>
+                                <div class="col-6">
+                                    : @item.so_luong_nguoi khách
+                                </div>
+                            </div>
+                            <a class="btn btn-warning" href="#">BOOKING</a>
+                            <a class="btn btn-outline-warning" href="/phong/index?id=@item.id_phong">VIEWMORE</a>
+                        </div>
+                    </div>
+                </div>
+
+
+            }
+        </div>
+    </div>
+    <div class="col-2">
+
+    </div>
+</div>
+

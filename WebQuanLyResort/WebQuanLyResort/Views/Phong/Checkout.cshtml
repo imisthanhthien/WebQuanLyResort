@@ -1,0 +1,108 @@
+﻿@model WebQuanLyResort.Models.BookingInfo
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_LayoutPageChiTiet.cshtml";
+}
+
+<form action="/phong/datphong" method="post">
+    <div class="row">
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-5">
+            <hr />
+            <h3>BILLING DETAILS</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="ten_khachhang">Họ tên</label>
+                    <input class="form-control" type="text" name="ten_khachhang" id="ten_khachhang" value="" />
+                </div>
+                <div class="col-md-6">
+                    <label for="ngay_sinh">Ngày sinh</label>
+                    <input class="form-control" type="date" name="ngay_sinh" id="ngay_sinh" value="" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="dia_chi">Địa chỉ</label>
+                    <input class="form-control" type="text" name="dia_chi" id="dia_chi" value="" />
+                </div>
+                <div class="col-md-6">
+                    <label for="sdt">Số điện thoại</label>
+                    <input class="form-control" type="number" name="sdt" id="sdt" value="" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="cmnd">CMND</label>
+                    <input class="form-control" type="number" name="cmnd" id="cmnd" value="" />
+                </div>
+                <div class="col-md-6">
+                    <label for="gioi_tinh">Giới tính</label>
+                    <input class="form-control" type="text" name="gioi_tinh" id="gioi_tinh" value="" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mt-3">
+            <div class="p-3" style="border: 2px solid black">
+                <h3>YOUR ORDER</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>PRODUCT</strong>
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-end">
+                        <strong>SUBTOTAL</strong>
+                    </div>
+
+                </div>
+
+                <hr />
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>@Model.tenphong</p>
+                        <p>FROM: @Model.CheckInDate.ToString("dd/MM/yyyy")</p>
+                        <input class="d-none" type="text" name="check_in" value="@Model.CheckInDate" />
+                        <input class="d-none" type="text" name="ngaydat" value="@Model.CheckInDate" />
+                        <input class="d-none" type="text" name="id_phong" value="@Model.idphong" />
+                        <p>ĐẾN: @Model.CheckOutDate.ToString("dd/MM/yyyy")</p>
+                        <input class="d-none" type="text" name="check_out" value="@Model.CheckOutDate" />
+                        <p>DURATION: @Model.songayo day</p>
+                        <p>Số khách: @Model.songuoio</p>
+                        <input class="d-none" type="text" name="so_nguoi_o" value="@Model.songuoio" />
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-end">
+                        @Model.datcoc.ToString("C")
+                        <input class="d-none" type="text" name="dat_coc" value="@Model.datcoc" />
+                    </div>
+                </div>
+
+                <hr />
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Subtotal</strong>
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-end">
+                        <p>@Model.tongtien.ToString("C")</p>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Total</strong>
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-end">
+                        <p>@Model.tongtien.ToString("C")</p>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-warning text-white">Đặt phòng</button>
+            </div>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+    </div>
+</form>
+

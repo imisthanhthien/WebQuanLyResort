@@ -5,60 +5,66 @@
 }
 @{
     ViewBag.date = 0;
+    ViewBag.dif = 0;
 }
 <div class="row">
     <div class="col-4">
 
     </div>
     <div class="col-4">
-        <div class="d-flex justify-content-center">
-            <h1 class="text-uppercase">@Model.loaiphong.ten_loai</h1>
-        </div>
-        <div class="d-flex justify-content-center">
-            <p>@Model.MoTa</p>
-        </div>
-        <div class="d-flex justify-content-center">
-            <p>@Model.loaiphong.gia.ToString("C")</p>
-        </div>
-        <div class="row">
-            <div class="d-flex justify-content-center mb-3">
-                Ngày
+        <form action="/phong/checkout" method="post">
+
+
+            <div class="d-flex justify-content-center">
+                <h1 style="color: #b48428; text-align: center" class="text-uppercase mt-3">@Model.loaiphong.ten_loai</h1>
+                <input class="d-none" type="text" name="idphong" value="@Model.id_phong" />
+                <input class="d-none" type="text" name="tenphong" value="@Model.loaiphong.ten_loai" />
             </div>
-            <div class="col-12">
-                <div class="row mb-3">
-                    <div class="col-6">
-                        <input class="form-control" type="date" id="dateInput" name="name" value="" />
+            <div class="d-flex justify-content-center">
+                <p style="text-align:center">@Model.MoTa</p>
+            </div>
+            <div class="d-flex justify-content-center">
+                <p style="color: #b48428">@Model.loaiphong.gia.ToString("C")</p>
+            </div>
+            <div class="row">
+                <div class="d-flex justify-content-center mb-3">
+                    Ngày
+                </div>
+                <div class="col-12">
+                    <div class="row mb-3">
+                        <div class="col-6 d-flex justify-content-center">
+                            <input class="form-control" type="date" id="dateInput" name="CheckInDate" value="" />
 
-                        <script>
-                            document.addEventListener("DOMContentLoaded", function () {
-                                var today = new Date();
-                                var dd = String(today.getDate()).padStart(2, '0');
-                                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-                                var yyyy = today.getFullYear();
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function () {
+                                    var today = new Date();
+                                    var dd = String(today.getDate()).padStart(2, '0');
+                                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                    var yyyy = today.getFullYear();
 
-                                today = yyyy + '-' + mm + '-' + dd;
-                                document.getElementById("dateInput").value = today;
-                            });
-                        </script>
-                    </div>
-                    <div class="col-6">
-                        <input class="form-control" type="date" id="dateInput2" name="name" value="" onchange="calculateDateDifference()" />
-                        <script>
-                            document.addEventListener("DOMContentLoaded", function () {
-                                var today = new Date();
-                                var dd = String(today.getDate()).padStart(2, '0');
-                                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-                                var yyyy = today.getFullYear();
+                                    today = yyyy + '-' + mm + '-' + dd;
+                                    document.getElementById("dateInput").value = today;
+                                });
+                            </script>
+                        </div>
+                        <div class="col-6 d-flex justify-content-center">
+                            <input class="form-control" type="date" id="dateInput2" name="CheckOutDate" value="" onchange="calculateDateDifference()" />
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function () {
+                                    var today = new Date();
+                                    var dd = String(today.getDate()).padStart(2, '0');
+                                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                    var yyyy = today.getFullYear();
 
-                                today = yyyy + '-' + mm + '-' + dd;
-                                document.getElementById("dateInput2").min = today;
-                            });
+                                    today = yyyy + '-' + mm + '-' + dd;
+                                    document.getElementById("dateInput2").min = today;
+                                });
 
 
-                        </script>
-                        <!-- Phần JavaScript -->
+                            </script>
+                            <!-- Phần JavaScript -->
 
-                        <script>
+                            <script>
                             function calculateDateDifference() {
                                 var date1 = document.getElementById("dateInput").value;
                                 var date2 = document.getElementById("dateInput2").value;
@@ -66,48 +72,59 @@
                                 var diffInMilliseconds = Math.abs(new Date(date2) - new Date(date1));
                                 var diffInDays = Math.ceil(diffInMilliseconds / (1000 * 60 * 60 * 24));
 
-                                document.getElementById("result").innerText = @(Model.loaiphong.gia * 0.75)+ "(đặt cọc 75%)" + " x " + diffInDays + " day";
-                                document.getElementById("tien").innerText = @(Model.loaiphong.gia * 0.75) * diffInDays;
-                                document.getElementById("tong").innerText = @(Model.loaiphong.gia * 0.75) * diffInDays;
+                                var totalPrice = @Model.loaiphong.gia * 0.75 * diffInDays;
+                                var datcoc = @Model.loaiphong.gia * 0.75
+                                document.getElementById("result").innerText = datcoc.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+                                document.getElementById("datcoc2").innerText = " (đặt cọc 75%)" + " x " + diffInDays + " day";
+                                document.getElementById("tien").innerText = totalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+                                document.getElementById("tong").innerText = totalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
                                 document.getElementById("booking").style.display = "flex";
-                                ViewBag.date = @(Model.loaiphong.gia * 0.75) * diffInDays;
+
+                                document.getElementById("inputsongayo").value = diffInDays;
+                                document.getElementById("inputdatcoc").value = datcoc;
+                                document.getElementById("inputtongtien").value = totalPrice;
+
                             }
-                        </script>
+                            </script>
+                            <input class="d-none" type="text" name="songayo" id="inputsongayo" value="" />
+                            <input class="d-none" type="text" name="datcoc" id="inputdatcoc" value="" />
+                            <input class="d-none" type="text" name="tongtien" id="inputtongtien" value="" />
+                        </div>
+
 
                     </div>
-
-
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="" style="text-align:center">
-                Số người ở
+            <div class="row">
+                <div class="" style="text-align:center">
+                    Số người ở
+                </div>
             </div>
-        </div>
-        <div class="row p-3">
-            <input type="text" class="form-control" name="name" value="" />
-        </div>
+            <div class="row p-3">
+                <input style="text-align: center" type="text" class="form-control" name="songuoio" value="1" />
+            </div>
 
-        <div class="row" style="display: none" id="booking">
-            <div class="col-md-6">
-                <span id="result">@(Model.loaiphong.gia * 0.75) x <span id="dateDifference">0</span> day</span>
+            <div class="row" style="display: none" id="booking">
+                <div class="col-md-6">
+                    <span id="result" style="color: #b48428"></span><span id="datcoc2"></span>
+                </div>
+                <div class="col-md-6  d-flex justify-content-end">
+                    <span id="tien" style="color: #b48428">@(Model.loaiphong.gia * 0.75) * @ViewBag.date</span>
+                </div>
+                <hr />
+                <div class="col-md-6" style="text-align: center">
+                    Total
+                </div>
+                <div class="col-md-6 d-flex justify-content-end">
+                    <span id="tong" style="color: #b48428"></span>
+                </div>
             </div>
-            <div class="col-md-6">
-                <span id="tien">@(Model.loaiphong.gia * 0.75) * @ViewBag.date</span>
-            </div>
-            <hr />
-            <div class="col-md-6">
-                Total
-            </div>
-            <div class="col-md-6">
-                <span id="tong"></span>
-            </div>
-        </div>
 
-        <div class="d-flex justify-content-center mt-3">
-            <a class="btn btn-warning w-100" href="#">Booking</a>
-        </div>
+            <div class="d-flex justify-content-center mt-3">
+                <button type="submit" class="btn btn-warning w-100" href="#">Booking</button>
+            </div>
+
+        </form>
     </div>
     <div class="col-4">
 
@@ -197,7 +214,7 @@
                     {
                         <div class="col">
                             <div class="card">
-                                <img src="~/Image/HinhAnh/@item.HinhAnh.Trim()" alt="Alternate Text" />
+                                <img style="height: 300px" src="~/Image/HinhAnh/@item.HinhAnh.Trim()" alt="Alternate Text" />
                                 <div class="card-body">
                                     <h3 class="text-success">@item.loaiphong.ten_loai</h3>
                                     <p>@item.loaiphong.gia.ToString("C")</p>
@@ -217,7 +234,7 @@
                                             : @item.Giuong
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row mb-3">
                                         <div class="col-6">
                                             Tiêu chuẩn
                                         </div>
