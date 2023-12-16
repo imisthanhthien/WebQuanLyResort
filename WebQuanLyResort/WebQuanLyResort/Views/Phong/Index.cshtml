@@ -7,7 +7,19 @@
     ViewBag.date = 0;
     ViewBag.dif = 0;
 }
-<div class="row">
+
+<style>
+    .card {
+        border: 1px solid #ced4da; /* Màu border mặc định */
+        transition: border-color 0.3s ease-in-out; /* Hiệu ứng chuyển đổi khi hover */
+    }
+
+        .card:hover {
+            border-color: #28a745; /* Đổi màu border khi hover */
+            transition: all 0.3s ease-in-out;
+        }
+</style>
+<div class="row" style="margin-top: 80px">
     <div class="col-4">
 
     </div>
@@ -27,12 +39,13 @@
                 <p style="color: #b48428">@Model.loaiphong.gia.ToString("C")</p>
             </div>
             <div class="row">
-                <div class="d-flex justify-content-center mb-3">
+                @*<div class="d-flex justify-content-center mb-3">
                     Ngày
-                </div>
+                </div>*@
                 <div class="col-12">
                     <div class="row mb-3">
-                        <div class="col-6 d-flex justify-content-center">
+                        <div class="col-6 d-flex flex-column justify-content-center align-items-center">
+                            <label for="dateInput">Ngày đặt phòng</label>
                             <input class="form-control" type="date" id="dateInput" name="CheckInDate" value="" />
 
                             <script>
@@ -47,7 +60,8 @@
                                 });
                             </script>
                         </div>
-                        <div class="col-6 d-flex justify-content-center">
+                        <div class="col-6 d-flex flex-column justify-content-center align-items-center">
+                            <label for="dateInput2">Ngày trả phòng</label>
                             <input class="form-control" type="date" id="dateInput2" name="CheckOutDate" value="" onchange="calculateDateDifference()" />
                             <script>
                                 document.addEventListener("DOMContentLoaded", function () {
@@ -97,12 +111,27 @@
             </div>
             <div class="row">
                 <div class="" style="text-align:center">
-                    Số người ở
+                    <label for="songuoio">Số người ở</label>
                 </div>
             </div>
             <div class="row p-3">
-                <input style="text-align: center" type="text" class="form-control" name="songuoio" value="1" />
+                <input style="text-align: center" type="text" class="form-control" name="songuoio" id="songuoio" value="1" />
             </div>
+
+            <script>
+            // Lấy giá trị của @Model.so_luong_nguoi từ code Razor và chuyển sang JavaScript
+            var soNguoiO = parseInt('@Model.so_luong_nguoi');
+
+            document.getElementById('songuoio').addEventListener('change', function() {
+                var inputValue = parseInt(this.value);
+
+                if (inputValue > soNguoiO) {
+                    alert('Quy định số người ở phòng này không vượt quá ' + soNguoiO + '. Vui lòng xem mô tả chi tiết.');
+                    this.value = soNguoiO; // Gán lại giá trị là giá trị tối đa cho phép
+                }
+            });
+            </script>
+
 
             <div class="row" style="display: none" id="booking">
                 <div class="col-md-6">
@@ -135,58 +164,60 @@
     <div class="col-2">
 
     </div>
-    <div class="col-4">
-        <img class="w-100" src="~/Image/HinhAnh/@Model.HinhAnh.Trim()" alt="Alternate Text" />
-    </div>
     <div class="col-3">
-        <h4 class="text-success">Mô tả chi tiết</h4>
+        <img  class="w-100" style="height: 360px; box-shadow: 5px 5px 20px 0px lightgray; border-radius: 10px" src="~/Image/HinhAnh/@Model.HinhAnh.Trim()" alt="Alternate Text" />
+    </div>
+    <div class="col-5">
         <div class="row">
-            <div class="col-6">
-                Diện tích
+            <div class="col-md-6">
+                <div class="card mb-4" style="border-radius: 10px">
+                    <div class="card-body">
+                        <h4 class="card-title text-success">Mô tả chi tiết</h4>
+                        <div class="detail-info">
+                            <div class="row">
+                                <div class="col-5">
+                                    <p class="">Diện tích:</p>
+                                    <p class="">Giường:</p>
+                                    <p class="">Tiêu chuẩn:</p>
+                                </div>
+                                <div class="col-7">
+                                    <p>@Model.DienTich</p>
+                                    <p>@Model.Giuong</p>
+                                    <p>@Model.so_luong_nguoi khách</p>
+                                </div>
+                            </div>
+                            <ul class="text-muted">
+                                <li>Giá trên đã bao gồm 10% VAT</li>
+                                <li>Giá chưa bao gồm 5% phí phục vụ chức ăn trong phòng</li>
+                                <li>Check-in: 14:00</li>
+                                <li>Check-out: 12:00</li>
+                                <li>Giá thay đổi theo từng thời điểm</li>
+                                <li>Phụ thu 10% trên giá niêm yết vào giai đoạn lễ 02/09 (01/09-03/09/2023)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-6">
-                : @Model.DienTich
+            <div class="col-md-6">
+                <div class="card mb-4" style="border-radius: 10px">
+                    <div class="card-body">
+                        <h4 class="card-title text-success">Bao gồm</h4>
+                        <ul class="text-muted">
+                            <li>Ăn sáng</li>
+                            <li>Đồ uống chào mừng</li>
+                            <li>Trái cây tươi trong phòng</li>
+                            <li>Nước suối, trà, cà phê mỗi ngày</li>
+                            <li>Miễn phí sử dụng hồ bơi</li>
+                            <li>Miễn phí dịch vụ câu cá</li>
+                            <li>Miễn phí truy cập internet</li>
+                            <li>Miễn phí sử dụng bãi đậu xe</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-6">
-                Giường
-            </div>
-            <div class="col-6">
-                : @Model.Giuong
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                Tiêu chuẩn
-            </div>
-            <div class="col-6">
-                : @Model.so_luong_nguoi khách
-            </div>
-        </div>
+    </div>
 
-        <ul>
-            <li>Giá trên đã bao gồm 10% VAT</li>
-            <li>Giá chưa bao gồm 5% phí phục vụ chức ăn trong phòng</li>
-            <li>Check-in: 14:00</li>
-            <li>Check-out: 12:00</li>
-            <li>Giá thay đổi theo từng thời điểm</li>
-            <li>Phụ thu 10% trên giá niêm yết vào giai đoạn lễ 02/09 (01/09-03/09/2023)</li>
-        </ul>
-    </div>
-    <div class="col-3">
-        <h4 class="text-success">Bao gồm</h4>
-        <ul>
-            <li>Ăn sáng</li>
-            <li>Đồ uống chào mừng</li>
-            <li>Trái cây tươi trong phòng</li>
-            <li>Nước suối, trà, cà phê mỗi ngày</li>
-            <li>Miễn phí sử dụng hồ bơi</li>
-            <li>Miễn phí dịch vụ câu cá</li>
-            <li>Miễn phí truy cập internet</li>
-            <li>Miễn phí sử dụng bãi đậu xe</li>
-        </ul>
-    </div>
     <div class="col-2">
 
     </div>
@@ -194,9 +225,9 @@
 @{
     ViewBag.index = 1;
 }
-<div style="background-color: #f4eddf" class="p-3">
+<div style="background-color: #f3f8fa" class="p-3">
     <div class="d-flex justify-content-center">
-        <h2 class="text-success mt-5 mb-3">Các loại phòng khác</h2>
+        <h2 class="text-success mt-2 mb-3">Các loại phòng khác</h2>
     </div>
     <div class="d-flex justify-content-center ">
         <h2 class="text-warning mb-3">Có thể bạn quan tâm</h2>
@@ -212,42 +243,45 @@
                 {
                     if (ViewBag.index < 4)
                     {
-                        <div class="col">
-                            <div class="card">
-                                <img style="height: 300px" src="~/Image/HinhAnh/@item.HinhAnh.Trim()" alt="Alternate Text" />
-                                <div class="card-body">
-                                    <h3 class="text-success">@item.loaiphong.ten_loai</h3>
-                                    <p>@item.loaiphong.gia.ToString("C")</p>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            Diện tích
+                        if (item.trang_thai == "Còn trống")
+                        {
+                            <div class="col">
+                                <div class="card p-2" style="border-radius: 10px">
+                                    <img style="height: 300px; border-radius: 10px" src="~/Image/HinhAnh/@item.HinhAnh.Trim()" alt="Alternate Text" />
+                                    <div class="card-body">
+                                        <h3 class="text-success">@item.loaiphong.ten_loai</h3>
+                                        <p>@item.loaiphong.gia.ToString("C")</p>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                Diện tích
+                                            </div>
+                                            <div class="col-6">
+                                                : @item.DienTich
+                                            </div>
                                         </div>
-                                        <div class="col-6">
-                                            : @item.DienTich
+                                        <div class="row">
+                                            <div class="col-6">
+                                                Giường
+                                            </div>
+                                            <div class="col-6">
+                                                : @item.Giuong
+                                            </div>
                                         </div>
+                                        <div class="row mb-3">
+                                            <div class="col-6">
+                                                Tiêu chuẩn
+                                            </div>
+                                            <div class="col-6">
+                                                : @item.so_luong_nguoi khách
+                                            </div>
+                                        </div>
+                                        <a class="btn btn-warning" href="#">BOOKING</a>
+                                        <a class="btn btn-outline-warning" href="/phong/index?id=@item.id_phong">VIEWMORE</a>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            Giường
-                                        </div>
-                                        <div class="col-6">
-                                            : @item.Giuong
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-6">
-                                            Tiêu chuẩn
-                                        </div>
-                                        <div class="col-6">
-                                            : @item.so_luong_nguoi khách
-                                        </div>
-                                    </div>
-                                    <a class="btn btn-warning" href="#">BOOKING</a>
-                                    <a class="btn btn-outline-warning" href="/phong/index?id=@item.id_phong">VIEWMORE</a>
                                 </div>
                             </div>
-                        </div>
-                        ViewBag.index += 1;
+                            ViewBag.index += 1;
+                        }
                     }
                 }
             </div>
