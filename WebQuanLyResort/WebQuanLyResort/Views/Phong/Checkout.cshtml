@@ -30,7 +30,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="sdt">Số điện thoại</label>
-                    <input class="form-control" type="number" name="sdt" id="sdt" value="" />
+                    <input class="form-control" type="tel" name="sdt" id="sdt" value="" />
                 </div>
             </div>
 
@@ -41,10 +41,39 @@
                 </div>
                 <div class="col-md-6">
                     <label for="gioi_tinh">Giới tính</label>
-                    <input class="form-control" type="text" name="gioi_tinh" id="gioi_tinh" value="" />
+                    <select class="form-control" name="gioi_tinh" id="gioi_tinh">
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                    </select>
                 </div>
             </div>
         </div>
+
+        <script>
+    // Kiểm tra ràng buộc ngày sinh phải đủ 18 tuổi
+    document.getElementById('ngay_sinh').addEventListener('change', function() {
+        var dob = new Date(this.value);
+        var today = new Date();
+        var age = today.getFullYear() - dob.getFullYear();
+        var monthDiff = today.getMonth() - dob.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+            age--;
+        }
+        if (age < 18) {
+            alert('Khách hàng phải đủ 18 tuổi trở lên.');
+            this.value = ''; // Xóa ngày sinh nếu không đủ tuổi
+        }
+    });
+
+    // Kiểm tra ràng buộc số điện thoại phải đủ 10 số
+    document.getElementById('sdt').addEventListener('change', function() {
+        if (this.value.length !== 10) {
+            alert('Số điện thoại phải đủ 10 số.');
+            this.value = ''; // Xóa số điện thoại nếu không đủ độ dài
+        }
+    });
+        </script>
+
         <div class="col-md-3 mt-3">
             <div class="p-3" style="border: 2px solid black">
                 <h3>YOUR ORDER</h3>

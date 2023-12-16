@@ -72,7 +72,7 @@ namespace WebQuanLyResort.Controllers
                 numberr++;
 
                 // Gán lại cho idkhachhang với định dạng "KH_" + số đã tăng
-                iddatphong = "KH_" + numberr.ToString();
+                iddatphong = "DT_" + numberr.ToString();
             }
             datphong datphong = new datphong();
             datphong.id_datphong = iddatphong;

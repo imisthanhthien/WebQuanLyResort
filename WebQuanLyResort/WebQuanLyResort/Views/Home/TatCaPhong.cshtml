@@ -3,10 +3,22 @@
     ViewBag.Title = "TatCaPhong";
     Layout = "~/Views/Shared/_LayoutPageChiTiet.cshtml";
 }
+<style>
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 5px 26px 0 rgba(68, 88, 144, 0.14);
+        transition: border-color 0.3s ease-in-out; /* Hiệu ứng chuyển đổi màu khi hover */
+    }
 
-<div class="row p-4">
-    <h2 style="text-align: center">Trải nghiệm</h2>
-    <h2 style="text-align: center">Không gian tĩnh lặng, yên bình</h2>
+        .card:hover {
+            border-color: #28a745; /* Đổi màu border khi hover sang màu xanh lá cây */
+            border: 1px solid #28a745;
+            transition: all 0.3s ease-in-out;
+        }
+</style>
+<div class="row p-4" style="margin-top: 80px">
+    <h2 style="text-align: center; color: #bb8102">Trải nghiệm</h2>
+    <h2 style="text-align: center; color: #bb8102">Không gian tĩnh lặng, yên bình</h2>
     <div class="col-md-2">
 
     </div>
@@ -26,41 +38,44 @@
             @foreach (var item in Model)
             {
 
-                <div class="col mb-3">
-                    <div class="card">
-                        <img style="height: 300px" src="~/Image/HinhAnh/@item.HinhAnh.Trim()" alt="Alternate Text" />
-                        <div class="card-body">
-                            <h3 class="text-success">@item.loaiphong.ten_loai</h3>
-                            <p style="color: #b48428">@item.loaiphong.gia.ToString("C")</p>
-                            <div class="row">
-                                <div class="col-6">
-                                    Diện tích
+                if (item.trang_thai == "Còn trống")
+                {
+                    <div class="col mb-3">
+                        <div class="card p-2" style="border-radius: 10px; box-shadow: 0 5px 26px 0 rgba(68, 88, 144, 0.14)">
+                            <img style="height: 300px; border-radius: 10px; " src="~/Image/HinhAnh/@item.HinhAnh.Trim()" alt="Alternate Text" />
+                            <div class="card-body">
+                                <h3 class="text-success">@item.loaiphong.ten_loai</h3>
+                                <p style="color: #b48428">@item.loaiphong.gia.ToString("C")</p>
+                                <div class="row">
+                                    <div class="col-6">
+                                        Diện tích
+                                    </div>
+                                    <div class="col-6">
+                                        : @item.DienTich
+                                    </div>
                                 </div>
-                                <div class="col-6">
-                                    : @item.DienTich
+                                <div class="row">
+                                    <div class="col-6">
+                                        Giường
+                                    </div>
+                                    <div class="col-6">
+                                        : @item.Giuong
+                                    </div>
                                 </div>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        Tiêu chuẩn
+                                    </div>
+                                    <div class="col-6">
+                                        : @item.so_luong_nguoi khách
+                                    </div>
+                                </div>
+                                <a class="btn btn-warning" href="/phong/index?id=@item.id_phong">ĐẶT TRƯỚC</a>
+                                <a class="btn btn-outline-warning" href="/phong/index?id=@item.id_phong">XEM THÊM</a>
                             </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    Giường
-                                </div>
-                                <div class="col-6">
-                                    : @item.Giuong
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-6">
-                                    Tiêu chuẩn
-                                </div>
-                                <div class="col-6">
-                                    : @item.so_luong_nguoi khách
-                                </div>
-                            </div>
-                            <a class="btn btn-warning" href="#">BOOKING</a>
-                            <a class="btn btn-outline-warning" href="/phong/index?id=@item.id_phong">VIEWMORE</a>
                         </div>
                     </div>
-                </div>
+                }
 
 
             }
