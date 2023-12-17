@@ -44,8 +44,10 @@
                         <div class="card p-2" style="border-radius: 10px; box-shadow: 0 5px 26px 0 rgba(68, 88, 144, 0.14)">
                             <img style="height: 300px; border-radius: 10px; " src="~/Image/HinhAnh/@item.HinhAnh.Trim()" alt="Alternate Text" />
                             <div class="card-body">
-                                <h3 class="text-success">@item.loaiphong.ten_loai</h3>
+                                <h4 class="text-success">@item.loaiphong.ten_loai</h4>
                                 <p style="color: #b48428">@item.loaiphong.gia.ToString("C")</p>
+                             
+                              
                                 <div class="row">
                                     <div class="col-6">
                                         Diện tích
@@ -69,6 +71,46 @@
                                     <div class="col-6">
                                         : @item.so_luong_nguoi khách
                                     </div>
+                                </div>
+                                <a class="btn btn-warning" href="/phong/index?id=@item.id_phong">ĐẶT TRƯỚC</a>
+                                <a class="btn btn-outline-warning" href="/phong/index?id=@item.id_phong">XEM THÊM</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else if (item.trang_thai != "Còn trống")
+                {
+                    <div class="col mb-3">
+                        <div class="card p-2" style="border-radius: 10px; box-shadow: 0 5px 26px 0 rgba(68, 88, 144, 0.14)">
+                            <img style="height: 300px; border-radius: 10px; " src="~/Image/HinhAnh/@item.HinhAnh.Trim()" alt="Alternate Text" />
+                            <div class="card-body">
+                                <h3 class="text-success">@item.loaiphong.ten_loai</h3>
+                                <p style="color: #b48428">@item.loaiphong.gia.ToString("C")</p>
+                                <span style="position:absolute; top: 12px; left: 200px; text-transform:uppercase;" class=" bg-danger p-1 rounded text-bg-secondary">HẾT PHÒNG</span>
+                                <div class="row">
+                                    <div class="col-6">
+                                        Diện tích
+                                    </div>
+                                    <div class="col-6">
+                                        : @item.DienTich
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        Giường
+                                    </div>
+                                    <div class="col-6">
+                                        : @item.Giuong
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        Tiêu chuẩn
+                                    </div>
+                                    <div class="col-6">
+                                        : @item.so_luong_nguoi khách
+                                    </div>
+
                                 </div>
                                 <a class="btn btn-warning" href="/phong/index?id=@item.id_phong">ĐẶT TRƯỚC</a>
                                 <a class="btn btn-outline-warning" href="/phong/index?id=@item.id_phong">XEM THÊM</a>

@@ -3,135 +3,129 @@
     ViewBag.Title = "Checkout";
     Layout = "~/Views/Shared/_LayoutPageChiTiet.cshtml";
 }
+<div style="padding-top:80px">
+    <form action="/phong/datphong" method="post">
+        <div class="row">
+            <div class="col-md-2">
 
-<form action="/phong/datphong" method="post">
-    <div class="row">
-        <div class="col-md-2">
-
-        </div>
-        <div class="col-md-5">
-            <hr />
-            <h3>BILLING DETAILS</h3>
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="ten_khachhang">Họ tên</label>
-                    <input class="form-control" type="text" name="ten_khachhang" id="ten_khachhang" value="" />
+            </div>
+            <div class="col-md-5">
+              
+                <h2 class="text-center m-2">CHI TIẾT THANH TOÁN</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="ten_khachhang">Họ tên</label>
+                        <input class="form-control" type="text" name="ten_khachhang" id="ten_khachhang" value="" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="ngay_sinh">Ngày sinh</label>
+                        <input class="form-control" type="date" name="ngay_sinh" id="ngay_sinh" value="" />
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <label for="ngay_sinh">Ngày sinh</label>
-                    <input class="form-control" type="date" name="ngay_sinh" id="ngay_sinh" value="" />
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="dia_chi">Địa chỉ</label>
+                        <input class="form-control" type="text" name="dia_chi" id="dia_chi" value="" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="sdt">Số điện thoại</label>
+                        <input class="form-control" type="tel" name="sdt" id="sdt" value="" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="cmnd">CMND</label>
+                        <input class="form-control" type="number" name="cmnd" id="cmnd" value="" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="gioi_tinh">Giới tính</label>
+                        <select class="form-control" name="gioi_tinh" id="gioi_tinh">
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="dia_chi">Địa chỉ</label>
-                    <input class="form-control" type="text" name="dia_chi" id="dia_chi" value="" />
-                </div>
-                <div class="col-md-6">
-                    <label for="sdt">Số điện thoại</label>
-                    <input class="form-control" type="tel" name="sdt" id="sdt" value="" />
+            <script>
+                // Kiểm tra ràng buộc ngày sinh phải đủ 18 tuổi
+                document.getElementById('ngay_sinh').addEventListener('change', function () {
+                    var dob = new Date(this.value);
+                    var today = new Date();
+                    var age = today.getFullYear() - dob.getFullYear();
+                    var monthDiff = today.getMonth() - dob.getMonth();
+                    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+                        age--;
+                    }
+                    if (age < 18) {
+                        alert('Khách hàng phải đủ 18 tuổi trở lên.');
+                        this.value = ''; // Xóa ngày sinh nếu không đủ tuổi
+                    }
+                });
+
+                // Kiểm tra ràng buộc số điện thoại phải đủ 10 số
+                document.getElementById('sdt').addEventListener('change', function () {
+                    if (this.value.length !== 10) {
+                        alert('Số điện thoại phải đủ 10 số.');
+                        this.value = ''; // Xóa số điện thoại nếu không đủ độ dài
+                    }
+                });
+            </script>
+
+            <div class="col-md-3 mt-3">
+                <div class="p-3" style="border: 2px solid black; width: 450px">
+                    <h3 class="text-center">ĐẶT HÀNG CỦA BẠN</h3>
+                  
+
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>@Model.tenphong</p>
+                            <p>TỪ NGÀY: @Model.CheckInDate.ToString("dd/MM/yyyy")</p>
+                            <input class="d-none" type="text" name="check_in" value="@Model.CheckInDate" />
+                            <input class="d-none" type="text" name="ngaydat" value="@Model.CheckInDate" />
+                            <input class="d-none" type="text" name="id_phong" value="@Model.idphong" />
+                            <p>ĐẾN NGÀY: @Model.CheckOutDate.ToString("dd/MM/yyyy")</p>
+                            <input class="d-none" type="text" name="check_out" value="@Model.CheckOutDate" />
+                            <p>SỐ NGÀY Ở: @Model.songayo ngày</p>
+                            <p>Số khách: @Model.songuoio</p>
+                            <input class="d-none" type="text" name="so_nguoi_o" value="@Model.songuoio" />
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-end">
+                            @Model.datcoc.ToString("C")
+                            <input class="d-none" type="text" name="dat_coc" value="@Model.datcoc" />
+                        </div>
+                    </div>
+
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>Tiền phòng</strong>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-end">
+                            <p>@Model.tongtien.ToString("C")</p>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>Tổng tiền</strong>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-end">
+                            <p>@Model.tongtien.ToString("C")</p>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-warning text-white">Đặt phòng</button>
                 </div>
             </div>
+            <div class="col-md-2">
 
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="cmnd">CMND</label>
-                    <input class="form-control" type="number" name="cmnd" id="cmnd" value="" />
-                </div>
-                <div class="col-md-6">
-                    <label for="gioi_tinh">Giới tính</label>
-                    <select class="form-control" name="gioi_tinh" id="gioi_tinh">
-                        <option value="Nam">Nam</option>
-                        <option value="Nữ">Nữ</option>
-                    </select>
-                </div>
             </div>
         </div>
+    </form>
 
-        <script>
-    // Kiểm tra ràng buộc ngày sinh phải đủ 18 tuổi
-    document.getElementById('ngay_sinh').addEventListener('change', function() {
-        var dob = new Date(this.value);
-        var today = new Date();
-        var age = today.getFullYear() - dob.getFullYear();
-        var monthDiff = today.getMonth() - dob.getMonth();
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
-            age--;
-        }
-        if (age < 18) {
-            alert('Khách hàng phải đủ 18 tuổi trở lên.');
-            this.value = ''; // Xóa ngày sinh nếu không đủ tuổi
-        }
-    });
 
-    // Kiểm tra ràng buộc số điện thoại phải đủ 10 số
-    document.getElementById('sdt').addEventListener('change', function() {
-        if (this.value.length !== 10) {
-            alert('Số điện thoại phải đủ 10 số.');
-            this.value = ''; // Xóa số điện thoại nếu không đủ độ dài
-        }
-    });
-        </script>
-
-        <div class="col-md-3 mt-3">
-            <div class="p-3" style="border: 2px solid black">
-                <h3>YOUR ORDER</h3>
-                <div class="row">
-                    <div class="col-md-6">
-                        <strong>PRODUCT</strong>
-                    </div>
-                    <div class="col-md-6 d-flex justify-content-end">
-                        <strong>SUBTOTAL</strong>
-                    </div>
-
-                </div>
-
-                <hr />
-                <div class="row">
-                    <div class="col-md-6">
-                        <p>@Model.tenphong</p>
-                        <p>FROM: @Model.CheckInDate.ToString("dd/MM/yyyy")</p>
-                        <input class="d-none" type="text" name="check_in" value="@Model.CheckInDate" />
-                        <input class="d-none" type="text" name="ngaydat" value="@Model.CheckInDate" />
-                        <input class="d-none" type="text" name="id_phong" value="@Model.idphong" />
-                        <p>ĐẾN: @Model.CheckOutDate.ToString("dd/MM/yyyy")</p>
-                        <input class="d-none" type="text" name="check_out" value="@Model.CheckOutDate" />
-                        <p>DURATION: @Model.songayo day</p>
-                        <p>Số khách: @Model.songuoio</p>
-                        <input class="d-none" type="text" name="so_nguoi_o" value="@Model.songuoio" />
-                    </div>
-                    <div class="col-md-6 d-flex justify-content-end">
-                        @Model.datcoc.ToString("C")
-                        <input class="d-none" type="text" name="dat_coc" value="@Model.datcoc" />
-                    </div>
-                </div>
-
-                <hr />
-                <div class="row">
-                    <div class="col-md-6">
-                        <strong>Subtotal</strong>
-                    </div>
-                    <div class="col-md-6 d-flex justify-content-end">
-                        <p>@Model.tongtien.ToString("C")</p>
-                    </div>
-                </div>
-                <hr />
-                <div class="row">
-                    <div class="col-md-6">
-                        <strong>Total</strong>
-                    </div>
-                    <div class="col-md-6 d-flex justify-content-end">
-                        <p>@Model.tongtien.ToString("C")</p>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn btn-warning text-white">Đặt phòng</button>
-            </div>
-        </div>
-        <div class="col-md-2">
-
-        </div>
-    </div>
-</form>
-
+</div>
