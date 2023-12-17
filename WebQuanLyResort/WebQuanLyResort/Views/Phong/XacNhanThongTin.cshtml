@@ -1,50 +1,55 @@
 ﻿@model WebQuanLyResort.Models.BookingInfo
 @{
-    ViewBag.Title = "Checkout";
+    ViewBag.Title = "XacNhanThongTin";
     Layout = "~/Views/Shared/_LayoutPageChiTiet.cshtml";
 }
+
 <div style="padding-top:80px">
-    <form action="/phong/xacnhanthongtin" method="post">
+    <form action="/phong/datphong" method="post">
         <div class="row">
             <div class="col-md-2">
 
             </div>
             <div class="col-md-5">
-              
-                <h2 class="text-center m-2">CHI TIẾT THANH TOÁN</h2>
+
+                <h2 class="text-center m-2">XÁC NHẬN THÔNG TIN ĐẶT PHÒNG</h2>
                 <div class="row">
                     <div class="col-md-6">
                         <label for="ten_khachhang">Họ tên</label>
-                        <input class="form-control" type="text" name="ten_khachhang" id="ten_khachhang" value="" />
+                        <input class="form-control" type="text" name="ten_khachhang" id="ten_khachhang" value="@ViewBag.khachhang.ten_khachhang" disabled />
+                        <input class="form-control d-none" type="text" name="ten_khachhang" id="ten_khachhang" value="@ViewBag.khachhang.ten_khachhang" />
+                        <input class="form-control d-none" type="text" name="id_khachhang" id="id_khachhang" value="@ViewBag.khachhang.id_khachhang" />
                     </div>
                     <div class="col-md-6">
                         <label for="ngay_sinh">Ngày sinh</label>
-                        <input class="form-control" type="date" name="ngay_sinh" id="ngay_sinh" value="" />
+                        <input class="form-control" type="text" name="ngay_sinh" id="ngay_sinh" value="@ViewBag.khachhang.ngay_sinh" disabled />
+                        <input class="form-control d-none" type="text" name="ngay_sinh" id="ngay_sinh" value="@ViewBag.khachhang.ngay_sinh" />
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
                         <label for="dia_chi">Địa chỉ</label>
-                        <input class="form-control" type="text" name="dia_chi" id="dia_chi" value="" />
+                        <input class="form-control" type="text" name="dia_chi" id="dia_chi" value="@ViewBag.khachhang.dia_chi" disabled />
+                        <input class="form-control d-none" type="text" name="dia_chi" id="dia_chi" value="@ViewBag.khachhang.dia_chi" />
                     </div>
                     <div class="col-md-6">
                         <label for="sdt">Số điện thoại</label>
-                        <input class="form-control" type="tel" name="sdt" id="sdt" value="" />
+                        <input class="form-control" type="tel" name="sdt" id="sdt" value="@ViewBag.khachhang.sdt" disabled />
+                        <input class="form-control d-none" type="tel" name="sdt" id="sdt" value="@ViewBag.khachhang.sdt" />
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
                         <label for="cmnd">CMND</label>
-                        <input class="form-control" type="number" name="cmnd" id="cmnd" value="" />
+                        <input class="form-control" type="number" name="cmnd" id="cmnd" value="@ViewBag.khachhang.cmnd" disabled />
+                        <input class="form-control d-none" type="number" name="cmnd" id="cmnd" value="@ViewBag.khachhang.cmnd" />
                     </div>
                     <div class="col-md-6">
                         <label for="gioi_tinh">Giới tính</label>
-                        <select class="form-control" name="gioi_tinh" id="gioi_tinh">
-                            <option value="Nam">Nam</option>
-                            <option value="Nữ">Nữ</option>
-                        </select>
+                        <input class="form-control" type="text" name="gioi_tinh" id="gioi_tinh" value="@ViewBag.khachhang.gioi_tinh" disabled />
+                        <input class="form-control d-none" type="text" name="gioi_tinh" id="gioi_tinh" value="@ViewBag.khachhang.gioi_tinh" />
                     </div>
                 </div>
             </div>
@@ -77,28 +82,25 @@
             <div class="col-md-3 mt-3">
                 <div class="p-3" style="border: 2px solid black; width: 450px">
                     <h3 class="text-center">ĐẶT HÀNG CỦA BẠN</h3>
-                  
+
 
                     <hr />
                     <div class="row">
                         <div class="col-md-6">
                             <p>@Model.tenphong</p>
                             <p>TỪ NGÀY: @Model.CheckInDate.ToString("dd/MM/yyyy")</p>
-                            <input class="d-none" type="text" name="CheckInDate" id="CheckInDate" value="@Model.CheckInDate" />
+                            <input class="d-none" type="text" name="check_in" value="@Model.CheckInDate" />
                             <input class="d-none" type="text" name="ngaydat" value="@Model.CheckInDate" />
-                            <input class="d-none" type="text" name="idphong" id="idphong" value="@Model.idphong" />
+                            <input class="d-none" type="text" name="id_phong" value="@Model.idphong" />
                             <p>ĐẾN NGÀY: @Model.CheckOutDate.ToString("dd/MM/yyyy")</p>
-                            <input class="d-none" type="text" name="CheckOutDate" id="CheckOutDate" value="@Model.CheckOutDate" />
+                            <input class="d-none" type="text" name="check_out" value="@Model.CheckOutDate" />
                             <p>SỐ NGÀY Ở: @Model.songayo ngày</p>
                             <p>Số khách: @Model.songuoio</p>
-                            <input class="d-none" type="text" name="songuoio" id="songuoio" value="@Model.songuoio" />
-                            <input class="d-none" type="text" name="songayo" id="songayo" value="@Model.songayo" />
+                            <input class="d-none" type="text" name="so_nguoi_o" value="@Model.songuoio" />
                         </div>
                         <div class="col-md-6 d-flex justify-content-end">
                             @Model.datcoc.ToString("C")
-                            <input class="d-none" type="text" name="datcoc" id="datcoc" value="@Model.datcoc" />
-                            <input class="d-none" type="text" name="tongtien" id="tongtien" value="@Model.tongtien" />
-                            <input class="d-none" type="text" name="tenphong" id="tenphong" value="@Model.tenphong" />
+                            <input class="d-none" type="text" name="dat_coc" value="@Model.datcoc" />
                         </div>
                     </div>
 
@@ -121,7 +123,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-warning text-white">Tiếp tục</button>
+                    <button type="submit" class="btn btn-warning text-white">Đặt phòng</button>
                 </div>
             </div>
             <div class="col-md-2">
@@ -132,3 +134,4 @@
 
 
 </div>
+
