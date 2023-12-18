@@ -10,7 +10,7 @@
 
             </div>
             <div class="col-md-5">
-              
+
                 <h2 class="text-center m-2">CHI TIẾT THANH TOÁN</h2>
                 <div class="row">
                     <div class="col-md-6">
@@ -77,7 +77,7 @@
             <div class="col-md-3 mt-3">
                 <div class="p-3" style="border: 2px solid black; width: 450px">
                     <h3 class="text-center">ĐẶT HÀNG CỦA BẠN</h3>
-                  
+
 
                     <hr />
                     <div class="row">
@@ -121,7 +121,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-warning text-white">Tiếp tục</button>
+                    <button disabled type="submit" class="btn btn-warning text-white">Tiếp tục</button>
                 </div>
             </div>
             <div class="col-md-2">
@@ -132,3 +132,26 @@
 
 
 </div>
+<script>
+    function checkInputs() {
+        var tenKhachHang = document.getElementById('ten_khachhang').value.trim();
+        var ngaySinh = document.getElementById('ngay_sinh').value.trim();
+        var diaChi = document.getElementById('dia_chi').value.trim();
+        var sdt = document.getElementById('sdt').value.trim();
+        var cmnd = document.getElementById('cmnd').value.trim();
+
+        var submitButton = document.querySelector('.btn.btn-warning.text-white');
+
+        if (tenKhachHang !== '' && ngaySinh !== '' && diaChi !== '' && sdt !== '' && cmnd !== '') {
+            submitButton.removeAttribute('disabled');
+        } else {
+            submitButton.setAttribute('disabled', 'disabled');
+        }
+    }
+
+    // Gắn sự kiện 'input' cho từng input để kiểm tra khi có thay đổi
+    var inputs = document.querySelectorAll('input, select');
+    inputs.forEach(function (input) {
+        input.addEventListener('input', checkInputs);
+    });
+</script>
