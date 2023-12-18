@@ -26,7 +26,7 @@
     <div class="col-4">
         @if (Model.trang_thai == "Còn trống")
         {
-            <form action="/phong/checkout" method="post">
+            <form action="/phong/checkout" method="post" id="bookingForm" onsubmit="return validateForm()">
 
 
                 <div class="d-flex justify-content-center">
@@ -66,9 +66,23 @@
                                 <label for="dateInput2">Ngày trả phòng</label>
                                 <input class="form-control" type="date" id="dateInput2" name="CheckOutDate" value="" onchange="calculateDateDifference()" />
                                 <script>
+                                    function validateForm() {
+                                        var checkOutDate = document.getElementById("dateInput2").value;
+
+                                        // Kiểm tra xem trường input có giá trị không
+                                        if (checkOutDate === '') {
+                                            alert("Vui lòng chọn ngày trả phòng!");
+                                            return false; // Ngăn chặn việc gửi form nếu trường input chưa được điền thông tin
+                                        }
+
+                                        // Nếu mọi thứ hợp lệ, cho phép gửi form
+                                        return true;
+                                    }
+                                </script>
+                                <script>
                                     document.addEventListener("DOMContentLoaded", function () {
                                         var today = new Date();
-                                        var dd = String(today.getDate()).padStart(2, '0');
+                                        var dd = String(today.getDate() + 1).padStart(2, '0');
                                         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                                         var yyyy = today.getFullYear();
 
