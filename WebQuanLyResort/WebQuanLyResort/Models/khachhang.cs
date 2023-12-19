@@ -1,4 +1,4 @@
-namespace WebQuanLyResort.Models
+﻿namespace WebQuanLyResort.Models
 {
     using System;
     using System.Collections.Generic;
@@ -42,6 +42,9 @@ namespace WebQuanLyResort.Models
         [Required]
         [StringLength(6)]
         public string gioi_tinh { get; set; }
+
+        [StringLength(50)]
+        public string email_khachhang { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<datphong> datphongs { get; set; }

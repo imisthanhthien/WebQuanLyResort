@@ -1,0 +1,70 @@
+﻿@model List<WebQuanLyResort.Models.datphong>
+@{
+    ViewBag.Title = "LichSuDatPhong";
+    Layout = "~/Views/Shared/_LayoutPageChiTiet.cshtml";
+}
+<style>
+    td {
+        text-align: center; /* Để căn giữa nội dung của các ô */
+    }
+    th {
+        text-align: center; /* Để căn giữa nội dung của các ô */
+    }
+
+</style>
+<div class="p-5">
+    <div class="d-flex justify-content-center">
+        <h2 class="text-primary" style="margin-top: 80px">TRA CỨU THÔNG TIN ĐẶT PHÒNG</h2>
+    </div>
+    <form class="d-flex align-items-center mb-3" action="/home/lichsudatphong" method="post">
+        <label for="search" class="mx-2 my-1">Tìm kiếm đơn đặt phòng</label>
+        <input type="search" class="form-control" style="width: 260px" id="search" name="search" value="@ViewBag.Search" placeholder="CCCD/CMND khách hàng..." />
+        <button type="submit" class="btn btn-primary mx-2">Tìm</button>
+    </form>
+
+    @if (Model.Count != 0)
+    {
+        <table class="table table-striped">
+            <tr>
+                <th>Mã đặt phòng</th>
+                <th>Tên khách hàng</th>
+                <th>Tên phòng</th>
+                <th>Check in</th>
+                <th>Check out</th>
+                <th>Đặt cọc</th>
+                <th>Số người ở</th>
+                <th>Trạng thái</th>
+                <th>Ngày đặt</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.id_datphong</td>
+                    <td>@item.khachhang.ten_khachhang</td>
+                    <td>@item.phong.ten</td>
+                    <td>@item.check_in.ToString().Replace("PM", "Chiều").Replace("AM","Sáng")</td>
+                    <td>@item.check_out.ToString().Replace("PM", "Chiều").Replace("AM", "Sáng")</td>
+                    <td>@item.dat_coc.Value.ToString("C")</td>
+                    <td>@item.so_nguoi_o</td>
+                    @if (item.trang_thai == "Đã thanh toán")
+                    {
+                        <td class="text-success">@item.trang_thai</td>
+                    }
+                    else
+                    {
+                        <td class="text-danger">@item.trang_thai</td>
+                    }
+                    <td>@item.ngaydat.Value.ToString("dd/MM/yyyy")</td>
+                </tr>
+            }
+        </table>
+
+    }
+    else
+    {
+        <div class="d-flex justify-content-center mt-5">
+            <h2 class="text-warning">Chưa có thông tin lịch sử đặt phòng, nhập CCCD - CMND để kiểm tra.</h2>
+        </div>
+    }
+
+</div>

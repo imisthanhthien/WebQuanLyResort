@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebQuanLyResort.Models;
+using System.Text.RegularExpressions;
 
 namespace WebQuanLyResort.Controllers
 {
@@ -13,62 +14,80 @@ namespace WebQuanLyResort.Controllers
         ResortDBContext db = new ResortDBContext();
         public ActionResult Index(string id)
         {
-            phong p = db.phongs.Where(row=>row.id_phong == id).FirstOrDefault();
+            phong p = db.phongs.Where(row => row.id_phong == id).FirstOrDefault();
             List<phong> phong = db.phongs.ToList();
             ViewBag.phong = phong;
             return View(p);
         }
-        
+
 
         [HttpPost]
         public ActionResult Checkout(BookingInfo booking)
         {
-
             return View(booking);
+        }
+        private bool IsValidEmail(string email)
+        {
+            string emailPattern = @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"; // Pattern để kiểm tra định dạng email
+
+            if (!string.IsNullOrEmpty(email))
+            {
+                return Regex.IsMatch(email, emailPattern);
+            }
+
+            return false;
         }
 
         [HttpPost]
-        public ActionResult XacNhanThongTin(khachhang kh,BookingInfo booking)
+        public ActionResult XacNhanThongTin(khachhang kh, BookingInfo booking)
         {
-            khachhang k = db.khachhangs.Where(row => row.cmnd == kh.cmnd).FirstOrDefault();
-            if (k!=null)
+            if (IsValidEmail(kh.email_khachhang))
             {
-                ViewBag.khachhang = k;
-                return View(booking);
+                khachhang k = db.khachhangs.Where(row => row.cmnd == kh.cmnd).FirstOrDefault();
+                if (k != null)
+                {
+                    ViewBag.khachhang = k;
+                    return View(booking);
+                }
+                else
+                {
+                    List<khachhang> lastKH = db.khachhangs.OrderBy(row => row.id_khachhang.Length).ToList();
+                    string idkhachhang = lastKH.Last().id_khachhang;
+
+                    // Tách phần số từ mã khách hàng hiện tại
+                    string numberPart = idkhachhang.Replace("KH_", ""); // Loại bỏ phần "KH_"
+
+                    // Chuyển phần số thành giá trị số nguyên
+                    if (int.TryParse(numberPart, out int number))
+                    {
+                        // Tăng giá trị số lên 1
+                        number++;
+
+                        // Gán lại cho idkhachhang với định dạng "KH_" + số đã tăng
+                        idkhachhang = "KH_" + number.ToString();
+                    }
+
+                    khachhang khach = new khachhang();
+                    khach.id_khachhang = idkhachhang;
+                    khach.ten_khachhang = kh.ten_khachhang;
+                    khach.ngay_sinh = kh.ngay_sinh;
+                    khach.dia_chi = kh.dia_chi;
+                    khach.sdt = kh.sdt;
+                    khach.cmnd = kh.cmnd;
+                    khach.gioi_tinh = kh.gioi_tinh;
+                    khach.email_khachhang = kh.email_khachhang;
+                    db.khachhangs.Add(khach);
+                    db.SaveChanges();
+
+                    ViewBag.khachhang = khach;
+                    return View(booking);
+                }
             }
             else
             {
-                List<khachhang> lastKH = db.khachhangs.OrderBy(row => row.id_khachhang.Length).ToList();
-                string idkhachhang = lastKH.Last().id_khachhang;
-
-                // Tách phần số từ mã khách hàng hiện tại
-                string numberPart = idkhachhang.Replace("KH_", ""); // Loại bỏ phần "KH_"
-
-                // Chuyển phần số thành giá trị số nguyên
-                if (int.TryParse(numberPart, out int number))
-                {
-                    // Tăng giá trị số lên 1
-                    number++;
-
-                    // Gán lại cho idkhachhang với định dạng "KH_" + số đã tăng
-                    idkhachhang = "KH_" + number.ToString();
-                }
-
-                khachhang khach = new khachhang();
-                khach.id_khachhang = idkhachhang;
-                khach.ten_khachhang = kh.ten_khachhang;
-                khach.ngay_sinh = kh.ngay_sinh;
-                khach.dia_chi = kh.dia_chi;
-                khach.sdt = kh.sdt;
-                khach.cmnd = kh.cmnd;
-                khach.gioi_tinh = kh.gioi_tinh;
-                db.khachhangs.Add(khach);
-                db.SaveChanges();
-
-                ViewBag.khachhang = khach;
-                return View(booking);
+                ModelState.AddModelError("InvalidEmail", "Email không hợp lệ. Vui lòng nhập lại.");
+                return View("Checkout", booking);
             }
-            
         }
 
         [HttpPost]

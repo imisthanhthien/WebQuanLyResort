@@ -3,6 +3,9 @@
     ViewBag.Title = "Checkout";
     Layout = "~/Views/Shared/_LayoutPageChiTiet.cshtml";
 }
+@{ 
+    ViewBag.acong = "@";
+}
 <div style="padding-top:80px">
     <form action="/phong/xacnhanthongtin" method="post">
         <div class="row">
@@ -47,6 +50,14 @@
                         </select>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="email_khachhang">Email</label>
+                        <input class="form-control" type="email" name="email_khachhang" id="email_khachhang" value="" />
+                        @Html.ValidationSummary()
+                    </div>
+
+                </div>
             </div>
 
             <script>
@@ -70,6 +81,12 @@
                     if (this.value.length !== 10) {
                         alert('Số điện thoại phải đủ 10 số.');
                         this.value = ''; // Xóa số điện thoại nếu không đủ độ dài
+                    }
+                });
+
+                document.getElementById('email_khachhang').addEventListener('change', function () {
+                    if (!validateEmail(this.value)) {
+                        alert('Email không đúng định dạng. Vui lòng nhập lại.');
                     }
                 });
             </script>
@@ -139,10 +156,11 @@
         var diaChi = document.getElementById('dia_chi').value.trim();
         var sdt = document.getElementById('sdt').value.trim();
         var cmnd = document.getElementById('cmnd').value.trim();
+        var email = document.getElementById('email_khachhang').value.trim();
 
         var submitButton = document.querySelector('.btn.btn-warning.text-white');
 
-        if (tenKhachHang !== '' && ngaySinh !== '' && diaChi !== '' && sdt !== '' && cmnd !== '') {
+        if (tenKhachHang !== '' && ngaySinh !== '' && diaChi !== '' && sdt !== '' && cmnd !== '' && email !== '') {
             submitButton.removeAttribute('disabled');
         } else {
             submitButton.setAttribute('disabled', 'disabled');
@@ -154,4 +172,6 @@
     inputs.forEach(function (input) {
         input.addEventListener('input', checkInputs);
     });
+
+
 </script>
