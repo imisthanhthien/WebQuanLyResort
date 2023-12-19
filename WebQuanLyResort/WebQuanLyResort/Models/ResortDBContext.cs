@@ -8,7 +8,7 @@ namespace WebQuanLyResort.Models
     public partial class ResortDBContext : DbContext
     {
         public ResortDBContext()
-            : base("name=ResortDBContext")
+            : base("name=ResortDBContextString")
         {
         }
 
@@ -22,7 +22,6 @@ namespace WebQuanLyResort.Models
         public virtual DbSet<nhanvien> nhanviens { get; set; }
         public virtual DbSet<phong> phongs { get; set; }
         public virtual DbSet<quyen> quyens { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<ThaoTacDatPhong> ThaoTacDatPhongs { get; set; }
         public virtual DbSet<thietbi> thietbis { get; set; }
         public virtual DbSet<chitietsudungdv> chitietsudungdvs { get; set; }
@@ -104,6 +103,10 @@ namespace WebQuanLyResort.Models
 
             modelBuilder.Entity<khachhang>()
                 .Property(e => e.cmnd)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<khachhang>()
+                .Property(e => e.email_khachhang)
                 .IsUnicode(false);
 
             modelBuilder.Entity<khachhang>()
