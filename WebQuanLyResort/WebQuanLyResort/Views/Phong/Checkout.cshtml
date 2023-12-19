@@ -79,7 +79,14 @@
                 // Kiểm tra ràng buộc số điện thoại phải đủ 10 số
                 document.getElementById('sdt').addEventListener('change', function () {
                     if (this.value.length !== 10) {
-                        alert('Số điện thoại phải đủ 10 số.');
+                        alert('Số điện thoại phải đủ 10 số. Vui lòng nhập lại.');
+                        this.value = ''; // Xóa số điện thoại nếu không đủ độ dài
+                    }
+                });
+                // Kiểm tra ràng buộc số điện thoại phải đủ 10 số
+                document.getElementById('cmnd').addEventListener('change', function () {
+                    if (this.value.length !== 10) {
+                        alert('CCCD phải đủ 12 số. Vui lòng nhập lại.');
                         this.value = ''; // Xóa số điện thoại nếu không đủ độ dài
                     }
                 });
