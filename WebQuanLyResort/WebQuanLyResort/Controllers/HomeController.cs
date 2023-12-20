@@ -30,10 +30,9 @@ namespace WebQuanLyResort.Controllers
             AppUser user = appdb.Users.Where(row => row.UserName == username).FirstOrDefault();
             if (user != null)
             {
-                // Xử lý an toàn dữ liệu đầu vào trước khi truy vấn cơ sở dữ liệu
-                string sanitizedSearch = SanitizeInput(user.CCCD);
 
-                khachhang kh = db.khachhangs.FirstOrDefault(row => row.cmnd == sanitizedSearch);
+
+                khachhang kh = db.khachhangs.FirstOrDefault(row => row.cmnd == user.CCCD);
 
                 if (kh != null)
                 {
@@ -44,10 +43,8 @@ namespace WebQuanLyResort.Controllers
             {
                 if (!string.IsNullOrEmpty(search))
                 {
-                    // Xử lý an toàn dữ liệu đầu vào trước khi truy vấn cơ sở dữ liệu
-                    string sanitizedSearch = SanitizeInput(search);
 
-                    khachhang kh = db.khachhangs.FirstOrDefault(row => row.cmnd == sanitizedSearch);
+                    khachhang kh = db.khachhangs.FirstOrDefault(row => row.cmnd == search);
 
                     if (kh != null)
                     {
@@ -56,10 +53,6 @@ namespace WebQuanLyResort.Controllers
                 }
             }
             return View(dp);
-        }
-        private string SanitizeInput(string input)
-        {
-            return input.Replace("'", "").Replace(";", "");
         }
     }
 }
