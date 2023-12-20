@@ -1,6 +1,6 @@
 ﻿@model WebQuanLyResort.Models.BookingInfo
 @{
-    ViewBag.Title = "XacNhanThongTin";
+    ViewBag.Title = "Moderna - Xác nhận thông tin đặt phòng";
     Layout = "~/Views/Shared/_LayoutPageChiTiet.cshtml";
 }
 
@@ -22,8 +22,8 @@
                     </div>
                     <div class="col-md-6">
                         <label for="ngay_sinh">Ngày sinh</label>
-                        <input class="form-control" type="text" name="ngay_sinh" id="ngay_sinh" value="@ViewBag.khachhang.ngay_sinh" disabled />
-                        <input class="form-control d-none" type="text" name="ngay_sinh" id="ngay_sinh" value="@ViewBag.khachhang.ngay_sinh" />
+                        <input class="form-control" type="text" name="ngay_sinh" id="ngay_sinh" value="@ViewBag.date" disabled />
+                        <input class="form-control d-none" type="text" name="ngay_sinh" id="ngay_sinh" value="@ViewBag.date" />
                     </div>
                 </div>
 
