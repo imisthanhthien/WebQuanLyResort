@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebQuanLyResort.Models;
 using System.Text.RegularExpressions;
+using WebQuanLyResort.Identity;
 
 namespace WebQuanLyResort.Controllers
 {
@@ -12,6 +13,7 @@ namespace WebQuanLyResort.Controllers
     {
         // GET: Phong
         ResortDBContext db = new ResortDBContext();
+        AppDbContext appdb = new AppDbContext();
         public ActionResult Index(string id)
         {
             phong p = db.phongs.Where(row => row.id_phong == id).FirstOrDefault();
@@ -22,8 +24,10 @@ namespace WebQuanLyResort.Controllers
 
 
         [HttpPost]
-        public ActionResult Checkout(BookingInfo booking)
+        public ActionResult Checkout(BookingInfo booking, string UserName="")
         {
+            AppUser user = appdb.Users.Where(row => row.UserName == UserName).FirstOrDefault();
+            ViewBag.user = user;
             return View(booking);
         }
         private bool IsValidEmail(string email)

@@ -10,7 +10,7 @@
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post))
 {
-<div class="row w-25 mx-auto " style="padding-left: 100px" >
+<div class="row w-25 mx-auto " style="padding-left: 100px">
     <div class="col-md-12">
         @Html.LabelFor(temp => temp.Username, "Tài khoản")
         @Html.TextBoxFor(temp => temp.Username, new { placeholder = "Username", @class = "form-control mt-2 mb-2" })
@@ -25,6 +25,21 @@
         @Html.LabelFor(temp => temp.Cccd)
         @Html.TextBoxFor(temp => temp.Cccd, new { placeholder = "Cccd", @class = "form-control mt-2 mb-2" })
         @Html.ValidationMessageFor(temp => temp.Cccd)
+    </div>
+    <div class="col-md-12">
+        @Html.LabelFor(temp => temp.Mobile)
+        @Html.TextBoxFor(temp => temp.Mobile, new { placeholder = "Mobile", @class = "form-control mt-2 mb-2" })
+        @Html.ValidationMessageFor(temp => temp.Mobile)
+    </div>
+    <div class="col-md-12">
+        <label for="DateOfBirth" class="form-label">Ngày sinh</label>
+        <input type="date" id="DateOfBirth" name="DateOfBirth" class="form-control mt-2 mb-2" >
+    </div>
+
+    <div class="col-md-12">
+        @Html.LabelFor(temp => temp.Address)
+        @Html.TextBoxFor(temp => temp.Address, new { placeholder = "Address", @class = "form-control mt-2 mb-2" })
+        @Html.ValidationMessageFor(temp => temp.Address)
     </div>
     <div class="col-md-12">
         @Html.LabelFor(temp => temp.Password, "Mật khẩu")
