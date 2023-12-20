@@ -42,8 +42,8 @@
                     <td>@item.id_datphong</td>
                     <td>@item.khachhang.ten_khachhang</td>
                     <td>@item.phong.ten</td>
-                    <td>@item.check_in.ToString().Replace("PM", "Chiều").Replace("AM","Sáng")</td>
-                    <td>@item.check_out.ToString().Replace("PM", "Chiều").Replace("AM", "Sáng")</td>
+                    <td>@item.check_in.ToString().Replace("PM", "").Replace("AM","").Replace("12:00:00","")</td>
+                    <td>@item.check_out.ToString().Replace("PM", "").Replace("AM", "").Replace("12:00:00", "")</td>
                     <td>@item.dat_coc.Value.ToString("C")</td>
                     <td>@item.so_nguoi_o</td>
                     @if (item.trang_thai == "Đã thanh toán")
