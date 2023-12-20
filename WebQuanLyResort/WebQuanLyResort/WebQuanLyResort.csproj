@@ -178,6 +178,7 @@
     <Content Include="assets\img\portfolio\portfolio-details-1.jpg" />
     <Content Include="assets\img\portfolio\portfolio-details-2.jpg" />
     <Content Include="assets\img\portfolio\portfolio-details-3.jpg" />
+    <Content Include="assets\img\resort.png" />
     <Content Include="assets\img\service-details-1.jpg" />
     <Content Include="assets\img\service-details-2.jpg" />
     <Content Include="assets\img\service-details-3.jpg" />
@@ -338,6 +339,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PhongController.cs" />
+    <Compile Include="Filter\MyAuthenFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

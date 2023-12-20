@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using WebQuanLyResort.Models;
 using System.Text.RegularExpressions;
 using WebQuanLyResort.Identity;
+using WebQuanLyResort.Filter;
 
 namespace WebQuanLyResort.Controllers
 {
@@ -24,6 +25,7 @@ namespace WebQuanLyResort.Controllers
 
 
         [HttpPost]
+        [MyAuthenFilter]
         public ActionResult Checkout(BookingInfo booking, string UserName="")
         {
             AppUser user = appdb.Users.Where(row => row.UserName == UserName).FirstOrDefault();
@@ -48,6 +50,8 @@ namespace WebQuanLyResort.Controllers
             if (IsValidEmail(kh.email_khachhang))
             {
                 khachhang k = db.khachhangs.Where(row => row.cmnd == kh.cmnd).FirstOrDefault();
+                string date = k.ngay_sinh.ToString("dd/MM/yyyy").Replace("PM", "").Replace("AM", "").Replace("12:00:00", "");
+                ViewBag.date = date;
                 if (k != null)
                 {
                     ViewBag.khachhang = k;
