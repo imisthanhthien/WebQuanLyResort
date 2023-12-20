@@ -19,82 +19,85 @@
             transition: all 0.3s ease-in-out;
         }
 </style>
-<div class="row" style="margin-top: 80px">
-    <div class="col-4">
 
-    </div>
-    <div class="col-4">
-        @if (Model.trang_thai == "Còn trống")
-        {
-            <form action="/phong/checkout" method="post" id="bookingForm" onsubmit="return validateForm()">
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="row" style="margin-top: 80px">
+        <div class="col-4">
+
+        </div>
+        <div class="col-4">
+            @if (Model.trang_thai == "Còn trống")
+            {
+                <form action="/phong/checkout?UserName=@User.Identity.Name" method="post" id="bookingForm" onsubmit="return validateForm()">
 
 
-                <div class="d-flex justify-content-center">
-                    <h1 style="color: #b48428; text-align: center" class="text-uppercase mt-3">@Model.loaiphong.ten_loai</h1>
-                    <input class="d-none" type="text" name="idphong" value="@Model.id_phong" />
-                    <input class="d-none" type="text" name="tenphong" value="@Model.loaiphong.ten_loai" />
-                </div>
-                <div class="d-flex justify-content-center">
-                    <p style="text-align:center">@Model.MoTa</p>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <p style="color: #b48428">@Model.loaiphong.gia.ToString("C")</p>
-                </div>
-                <div class="row">
-                    @*<div class="d-flex justify-content-center mb-3">
-                Ngày
-            </div>*@
-                    <div class="col-12">
-                        <div class="row mb-3">
-                            <div class="col-6 d-flex flex-column justify-content-center align-items-center">
-                                <label for="dateInput">Ngày đặt phòng</label>
-                                <input class="form-control" type="date" id="dateInput" name="CheckInDate" value="" />
+                    <div class="d-flex justify-content-center">
+                        <h1 style="color: #b48428; text-align: center" class="text-uppercase mt-3">@Model.loaiphong.ten_loai</h1>
+                        <input class="d-none" type="text" name="idphong" value="@Model.id_phong" />
+                        <input class="d-none" type="text" name="tenphong" value="@Model.loaiphong.ten_loai" />
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <p style="text-align:center">@Model.MoTa</p>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <p style="color: #b48428">@Model.loaiphong.gia.ToString("C")</p>
+                    </div>
+                    <div class="row">
+                        @*<div class="d-flex justify-content-center mb-3">
+                                Ngày
+                            </div>*@
+                        <div class="col-12">
+                            <div class="row mb-3">
+                                <div class="col-6 d-flex flex-column justify-content-center align-items-center">
+                                    <label for="dateInput">Ngày đặt phòng</label>
+                                    <input class="form-control" type="date" id="dateInput" name="CheckInDate" value="" />
 
-                                <script>
-                                    document.addEventListener("DOMContentLoaded", function () {
-                                        var today = new Date();
-                                        var dd = String(today.getDate()).padStart(2, '0');
-                                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-                                        var yyyy = today.getFullYear();
+                                    <script>
+                                        document.addEventListener("DOMContentLoaded", function () {
+                                            var today = new Date();
+                                            var dd = String(today.getDate()).padStart(2, '0');
+                                            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                            var yyyy = today.getFullYear();
 
-                                        today = yyyy + '-' + mm + '-' + dd;
-                                        document.getElementById("dateInput").value = today;
-                                    });
-                                </script>
-                            </div>
-                            <div class="col-6 d-flex flex-column justify-content-center align-items-center">
-                                <label for="dateInput2">Ngày trả phòng</label>
-                                <input class="form-control" type="date" id="dateInput2" name="CheckOutDate" value="" onchange="calculateDateDifference()" />
-                                <script>
-                                    function validateForm() {
-                                        var checkOutDate = document.getElementById("dateInput2").value;
+                                            today = yyyy + '-' + mm + '-' + dd;
+                                            document.getElementById("dateInput").value = today;
+                                        });
+                                    </script>
+                                </div>
+                                <div class="col-6 d-flex flex-column justify-content-center align-items-center">
+                                    <label for="dateInput2">Ngày trả phòng</label>
+                                    <input class="form-control" type="date" id="dateInput2" name="CheckOutDate" value="" onchange="calculateDateDifference()" />
+                                    <script>
+                                        function validateForm() {
+                                            var checkOutDate = document.getElementById("dateInput2").value;
 
-                                        // Kiểm tra xem trường input có giá trị không
-                                        if (checkOutDate === '') {
-                                            alert("Vui lòng chọn ngày trả phòng!");
-                                            return false; // Ngăn chặn việc gửi form nếu trường input chưa được điền thông tin
+                                            // Kiểm tra xem trường input có giá trị không
+                                            if (checkOutDate === '') {
+                                                alert("Vui lòng chọn ngày trả phòng!");
+                                                return false; // Ngăn chặn việc gửi form nếu trường input chưa được điền thông tin
+                                            }
+
+                                            // Nếu mọi thứ hợp lệ, cho phép gửi form
+                                            return true;
                                         }
+                                    </script>
+                                    <script>
+                                        document.addEventListener("DOMContentLoaded", function () {
+                                            var today = new Date();
+                                            var dd = String(today.getDate() + 1).padStart(2, '0');
+                                            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                            var yyyy = today.getFullYear();
 
-                                        // Nếu mọi thứ hợp lệ, cho phép gửi form
-                                        return true;
-                                    }
-                                </script>
-                                <script>
-                                    document.addEventListener("DOMContentLoaded", function () {
-                                        var today = new Date();
-                                        var dd = String(today.getDate() + 1).padStart(2, '0');
-                                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-                                        var yyyy = today.getFullYear();
-
-                                        today = yyyy + '-' + mm + '-' + dd;
-                                        document.getElementById("dateInput2").min = today;
-                                    });
+                                            today = yyyy + '-' + mm + '-' + dd;
+                                            document.getElementById("dateInput2").min = today;
+                                        });
 
 
-                                </script>
-                                <!-- Phần JavaScript -->
+                                    </script>
+                                    <!-- Phần JavaScript -->
 
-                                <script>
+                                    <script>
                       function calculateDateDifference() {
                           var date1 = document.getElementById("dateInput").value;
                           var date2 = document.getElementById("dateInput2").value;
@@ -115,26 +118,26 @@
                           document.getElementById("inputtongtien").value = totalPrice;
 
                       }
-                                </script>
-                                <input class="d-none" type="text" name="songayo" id="inputsongayo" value="" />
-                                <input class="d-none" type="text" name="datcoc" id="inputdatcoc" value="" />
-                                <input class="d-none" type="text" name="tongtien" id="inputtongtien" value="" />
+                                    </script>
+                                    <input class="d-none" type="text" name="songayo" id="inputsongayo" value="" />
+                                    <input class="d-none" type="text" name="datcoc" id="inputdatcoc" value="" />
+                                    <input class="d-none" type="text" name="tongtien" id="inputtongtien" value="" />
+                                </div>
+
+
                             </div>
-
-
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="" style="text-align:center">
-                        <label for="songuoio">Số người ở</label>
+                    <div class="row">
+                        <div class="" style="text-align:center">
+                            <label for="songuoio">Số người ở</label>
+                        </div>
                     </div>
-                </div>
-                <div class="row p-3">
-                    <input style="text-align: center" type="text" class="form-control" name="songuoio" id="songuoio" value="1" />
-                </div>
+                    <div class="row p-3">
+                        <input style="text-align: center" type="text" class="form-control" name="songuoio" id="songuoio" value="1" />
+                    </div>
 
-                <script>
+                    <script>
       // Lấy giá trị của @Model.so_luong_nguoi từ code Razor và chuyển sang JavaScript
       var soNguoiO = parseInt('@Model.so_luong_nguoi');
 
@@ -146,50 +149,219 @@
               this.value = soNguoiO; // Gán lại giá trị là giá trị tối đa cho phép
           }
       });
-                </script>
+                    </script>
 
 
-                <div class="row" style="display: none" id="booking">
-                    <div class="col-md-6">
-                        <span id="result" style="color: #b48428"></span><span id="datcoc2"></span>
+                    <div class="row" style="display: none" id="booking">
+                        <div class="col-md-6">
+                            <span id="result" style="color: #b48428"></span><span id="datcoc2"></span>
+                        </div>
+                        <div class="col-md-6  d-flex justify-content-end">
+                            <span id="tien" style="color: #b48428">@(Model.loaiphong.gia * 0.75) * @ViewBag.date</span>
+                        </div>
+                        <hr />
+                        <div class="col-md-6" style="text-align: center">
+                            Total
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-end">
+                            <span id="tong" style="color: #b48428"></span>
+                        </div>
                     </div>
-                    <div class="col-md-6  d-flex justify-content-end">
-                        <span id="tien" style="color: #b48428">@(Model.loaiphong.gia * 0.75) * @ViewBag.date</span>
-                    </div>
-                    <hr />
-                    <div class="col-md-6" style="text-align: center">
-                        Total
-                    </div>
-                    <div class="col-md-6 d-flex justify-content-end">
-                        <span id="tong" style="color: #b48428"></span>
-                    </div>
-                </div>
 
-                <div class="d-flex justify-content-center mt-3">
-                    <button type="submit" class="btn btn-warning w-100" href="#">Đặt phòng</button>
-                </div>
+                    <div class="d-flex justify-content-center mt-3">
+                        <button type="submit" class="btn btn-warning w-100" href="#">Đặt phòng</button>
+                    </div>
+                    <br />
+                </form>
+            }
+            else
+            {
+                <h1 style="color: #ff0000; text-align: center" class="text-uppercase mt-3">HẾT PHÒNG</h1>
+                <span>Vui lòng liên hệ SĐT : 0909090975xx để biết thêm chi tiết</span>
                 <br />
-            </form>
-        }
-        else
-        {
-            <h1 style="color: #ff0000; text-align: center" class="text-uppercase mt-3">HẾT PHÒNG</h1>
-            <span>Vui lòng liên hệ SĐT : 0909090975xx để biết thêm chi tiết</span>
-           <br />
-        }
+            }
 
+        </div>
+        <div class="col-4">
+
+        </div>
     </div>
-    <div class="col-4">
-       
+}
+else
+{
+    <div class="row" style="margin-top: 80px">
+        <div class="col-4">
+
+        </div>
+        <div class="col-4">
+            @if (Model.trang_thai == "Còn trống")
+            {
+                <form action="/phong/checkout" method="post" id="bookingForm" onsubmit="return validateForm()">
+
+
+                    <div class="d-flex justify-content-center">
+                        <h1 style="color: #b48428; text-align: center" class="text-uppercase mt-3">@Model.loaiphong.ten_loai</h1>
+                        <input class="d-none" type="text" name="idphong" value="@Model.id_phong" />
+                        <input class="d-none" type="text" name="tenphong" value="@Model.loaiphong.ten_loai" />
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <p style="text-align:center">@Model.MoTa</p>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <p style="color: #b48428">@Model.loaiphong.gia.ToString("C")</p>
+                    </div>
+                    <div class="row">
+                        @*<div class="d-flex justify-content-center mb-3">
+                                Ngày
+                            </div>*@
+                        <div class="col-12">
+                            <div class="row mb-3">
+                                <div class="col-6 d-flex flex-column justify-content-center align-items-center">
+                                    <label for="dateInput">Ngày đặt phòng</label>
+                                    <input class="form-control" type="date" id="dateInput" name="CheckInDate" value="" />
+
+                                    <script>
+                                        document.addEventListener("DOMContentLoaded", function () {
+                                            var today = new Date();
+                                            var dd = String(today.getDate()).padStart(2, '0');
+                                            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                            var yyyy = today.getFullYear();
+
+                                            today = yyyy + '-' + mm + '-' + dd;
+                                            document.getElementById("dateInput").value = today;
+                                        });
+                                    </script>
+                                </div>
+                                <div class="col-6 d-flex flex-column justify-content-center align-items-center">
+                                    <label for="dateInput2">Ngày trả phòng</label>
+                                    <input class="form-control" type="date" id="dateInput2" name="CheckOutDate" value="" onchange="calculateDateDifference()" />
+                                    <script>
+                                        function validateForm() {
+                                            var checkOutDate = document.getElementById("dateInput2").value;
+
+                                            // Kiểm tra xem trường input có giá trị không
+                                            if (checkOutDate === '') {
+                                                alert("Vui lòng chọn ngày trả phòng!");
+                                                return false; // Ngăn chặn việc gửi form nếu trường input chưa được điền thông tin
+                                            }
+
+                                            // Nếu mọi thứ hợp lệ, cho phép gửi form
+                                            return true;
+                                        }
+                                    </script>
+                                    <script>
+                                        document.addEventListener("DOMContentLoaded", function () {
+                                            var today = new Date();
+                                            var dd = String(today.getDate() + 1).padStart(2, '0');
+                                            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                            var yyyy = today.getFullYear();
+
+                                            today = yyyy + '-' + mm + '-' + dd;
+                                            document.getElementById("dateInput2").min = today;
+                                        });
+
+
+                                    </script>
+                                    <!-- Phần JavaScript -->
+
+                                    <script>
+                      function calculateDateDifference() {
+                          var date1 = document.getElementById("dateInput").value;
+                          var date2 = document.getElementById("dateInput2").value;
+
+                          var diffInMilliseconds = Math.abs(new Date(date2) - new Date(date1));
+                          var diffInDays = Math.ceil(diffInMilliseconds / (1000 * 60 * 60 * 24));
+
+                          var totalPrice = @Model.loaiphong.gia * 0.75 * diffInDays;
+                          var datcoc = @Model.loaiphong.gia * 0.75
+                          document.getElementById("result").innerText = datcoc.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+                          document.getElementById("datcoc2").innerText = " (đặt cọc 75%)" + " x " + diffInDays + " day";
+                          document.getElementById("tien").innerText = totalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+                          document.getElementById("tong").innerText = totalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+                          document.getElementById("booking").style.display = "flex";
+
+                          document.getElementById("inputsongayo").value = diffInDays;
+                          document.getElementById("inputdatcoc").value = datcoc;
+                          document.getElementById("inputtongtien").value = totalPrice;
+
+                      }
+                                    </script>
+                                    <input class="d-none" type="text" name="songayo" id="inputsongayo" value="" />
+                                    <input class="d-none" type="text" name="datcoc" id="inputdatcoc" value="" />
+                                    <input class="d-none" type="text" name="tongtien" id="inputtongtien" value="" />
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="" style="text-align:center">
+                            <label for="songuoio">Số người ở</label>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <input style="text-align: center" type="text" class="form-control" name="songuoio" id="songuoio" value="1" />
+                    </div>
+
+                    <script>
+      // Lấy giá trị của @Model.so_luong_nguoi từ code Razor và chuyển sang JavaScript
+      var soNguoiO = parseInt('@Model.so_luong_nguoi');
+
+      document.getElementById('songuoio').addEventListener('change', function() {
+          var inputValue = parseInt(this.value);
+
+          if (inputValue > soNguoiO) {
+              alert('Quy định số người ở phòng này không vượt quá ' + soNguoiO + '. Vui lòng xem mô tả chi tiết.');
+              this.value = soNguoiO; // Gán lại giá trị là giá trị tối đa cho phép
+          }
+      });
+                    </script>
+
+
+                    <div class="row" style="display: none" id="booking">
+                        <div class="col-md-6">
+                            <span id="result" style="color: #b48428"></span><span id="datcoc2"></span>
+                        </div>
+                        <div class="col-md-6  d-flex justify-content-end">
+                            <span id="tien" style="color: #b48428">@(Model.loaiphong.gia * 0.75) * @ViewBag.date</span>
+                        </div>
+                        <hr />
+                        <div class="col-md-6" style="text-align: center">
+                            Total
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-end">
+                            <span id="tong" style="color: #b48428"></span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center mt-3">
+                        <button type="submit" class="btn btn-warning w-100" href="#">Đặt phòng</button>
+                    </div>
+                    <br />
+                </form>
+            }
+            else
+            {
+                <h1 style="color: #ff0000; text-align: center" class="text-uppercase mt-3">HẾT PHÒNG</h1>
+                <span>Vui lòng liên hệ SĐT : 0909090975xx để biết thêm chi tiết</span>
+                <br />
+            }
+
+        </div>
+        <div class="col-4">
+
+        </div>
     </div>
-</div>
+}
+
 
 <div class="row p-5">
     <div class="col-2">
 
     </div>
     <div class="col-3">
-        <img  class="w-100" style="height: 360px; box-shadow: 5px 5px 20px 0px lightgray; border-radius: 10px" src="~/Image/HinhAnh/@Model.HinhAnh.Trim()" alt="Alternate Text" />
+        <img class="w-100" style="height: 360px; box-shadow: 5px 5px 20px 0px lightgray; border-radius: 10px" src="~/Image/HinhAnh/@Model.HinhAnh.Trim()" alt="Alternate Text" />
     </div>
     <div class="col-5">
         <div class="row">

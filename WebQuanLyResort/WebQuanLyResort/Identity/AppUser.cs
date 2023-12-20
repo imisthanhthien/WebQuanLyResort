@@ -8,6 +8,7 @@ namespace WebQuanLyResort.Identity
 {
     public class AppUser : IdentityUser
     {
+        public string BirthDay { get; set; }
         public string CCCD { get; set; }
         public string Gmail { get; set; }
         public string Address { get; set; }

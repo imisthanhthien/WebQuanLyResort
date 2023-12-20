@@ -136,9 +136,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ResortDBUser.mdf" />
-    <Content Include="App_Data\ResortDBUser_log.ldf">
-      <DependentUpon>ResortDBUser.mdf</DependentUpon>
+    <Content Include="App_Data\ResortDBQuanLyUser.mdf" />
+    <Content Include="App_Data\ResortDBQuanLyUser_log.ldf">
+      <DependentUpon>ResortDBQuanLyUser.mdf</DependentUpon>
     </Content>
     <Content Include="assets\css\style.css" />
     <Content Include="assets\img\about.jpg" />

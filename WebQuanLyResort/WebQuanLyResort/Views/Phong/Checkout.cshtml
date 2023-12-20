@@ -18,29 +18,30 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="ten_khachhang">Họ tên</label>
-                        <input class="form-control" type="text" name="ten_khachhang" id="ten_khachhang" value="" />
+                        <input class="form-control" type="text" name="ten_khachhang" id="ten_khachhang" value="@ViewBag.user.UserName" />
                     </div>
                     <div class="col-md-6">
                         <label for="ngay_sinh">Ngày sinh</label>
-                        <input class="form-control" type="date" name="ngay_sinh" id="ngay_sinh" value="" />
+                        <input class="form-control" type="date" name="ngay_sinh" id="ngay_sinh" value="@ViewBag.user.BirthDay" />
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
                         <label for="dia_chi">Địa chỉ</label>
-                        <input class="form-control" type="text" name="dia_chi" id="dia_chi" value="" />
+                        <input class="form-control" type="text" name="dia_chi" id="dia_chi" value="@ViewBag.user.Address" />
                     </div>
                     <div class="col-md-6">
                         <label for="sdt">Số điện thoại</label>
-                        <input class="form-control" type="tel" name="sdt" id="sdt" value="" />
+                        <input class="form-control" type="tel" name="sdt" id="sdt" value="@ViewBag.user.PhoneNumber" />
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="cmnd">CMND</label>
-                        <input class="form-control" type="number" name="cmnd" id="cmnd" value="" />
+                        <label for="cmnd">CCCD</label>
+                        <input class="form-control" type="number" name="cmnd" id="cmnd" value="@ViewBag.user.CCCD" disabled/>
+                        <input class="form-control d-none" type="number" name="cmnd" id="cmnd" value="@ViewBag.user.CCCD" />
                     </div>
                     <div class="col-md-6">
                         <label for="gioi_tinh">Giới tính</label>
@@ -53,7 +54,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label for="email_khachhang">Email</label>
-                        <input class="form-control" type="email" name="email_khachhang" id="email_khachhang" value="" />
+                        <input class="form-control" type="email" name="email_khachhang" id="email_khachhang" value="@ViewBag.user.Email" disabled/>
+                        <input class="form-control d-none" type="email" name="email_khachhang" id="email_khachhang" value="@ViewBag.user.Email" />
                         @Html.ValidationSummary()
                     </div>
 

@@ -65,6 +65,7 @@ namespace WebQuanLyResort.Controllers
                     Email = rvm.Email,
                     UserName = rvm.Username,
                     PasswordHash = passwdHash,
+                    BirthDay = rvm.DateOfBirth,
                     CCCD = rvm.Cccd,
                     Address = rvm.Address,
                     PhoneNumber = rvm.Mobile

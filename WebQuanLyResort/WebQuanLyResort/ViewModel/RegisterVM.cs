@@ -22,6 +22,7 @@ namespace WebQuanLyResort.ViewModel
         [RegularExpression("^[0-9]{12}$", ErrorMessage = "CCCD cần phải có đúng 12 số.")]
         public string Cccd { get; set; }
         public string Mobile { get; set; }
+        public string DateOfBirth { get; set; }
         public string Address { get; set; }
         //public string City { get; set; }
     }
