@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebQuanLyResort.Identity;
 using WebQuanLyResort.Models;
 
 namespace WebQuanLyResort.Controllers
@@ -22,15 +23,15 @@ namespace WebQuanLyResort.Controllers
             List<phong> phong = db.phongs.ToList();
             return View(phong);
         }
-
-        public ActionResult LichSuDatPhong(string search = "")
+        AppDbContext appdb = new AppDbContext();
+        public ActionResult LichSuDatPhong(string search = "", string username = "")
         {
             List<datphong> dp = new List<datphong>();
-
-            if (!string.IsNullOrEmpty(search))
+            AppUser user = appdb.Users.Where(row => row.UserName == username).FirstOrDefault();
+            if (user != null)
             {
                 // Xử lý an toàn dữ liệu đầu vào trước khi truy vấn cơ sở dữ liệu
-                string sanitizedSearch = SanitizeInput(search);
+                string sanitizedSearch = SanitizeInput(user.CCCD);
 
                 khachhang kh = db.khachhangs.FirstOrDefault(row => row.cmnd == sanitizedSearch);
 
@@ -39,7 +40,21 @@ namespace WebQuanLyResort.Controllers
                     dp = db.datphongs.Where(row => row.id_khachhang == kh.id_khachhang).ToList();
                 }
             }
+            else
+            {
+                if (!string.IsNullOrEmpty(search))
+                {
+                    // Xử lý an toàn dữ liệu đầu vào trước khi truy vấn cơ sở dữ liệu
+                    string sanitizedSearch = SanitizeInput(search);
 
+                    khachhang kh = db.khachhangs.FirstOrDefault(row => row.cmnd == sanitizedSearch);
+
+                    if (kh != null)
+                    {
+                        dp = db.datphongs.Where(row => row.id_khachhang == kh.id_khachhang).ToList();
+                    }
+                }
+            }
             return View(dp);
         }
         private string SanitizeInput(string input)
