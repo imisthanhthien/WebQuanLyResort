@@ -50,10 +50,10 @@ namespace WebQuanLyResort.Controllers
             if (IsValidEmail(kh.email_khachhang))
             {
                 khachhang k = db.khachhangs.Where(row => row.cmnd == kh.cmnd).FirstOrDefault();
-                string date = k.ngay_sinh.ToString("dd/MM/yyyy").Replace("PM", "").Replace("AM", "").Replace("12:00:00", "");
-                ViewBag.date = date;
                 if (k != null)
                 {
+                    string date = k.ngay_sinh.ToString("dd/MM/yyyy");
+                    ViewBag.date = date;
                     ViewBag.khachhang = k;
                     return View(booking);
                 }
