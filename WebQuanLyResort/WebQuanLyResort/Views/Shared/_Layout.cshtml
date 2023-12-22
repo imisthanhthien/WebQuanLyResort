@@ -27,9 +27,11 @@
 
     <!-- Template Main CSS File -->
     <link href="~/assets/css/style.css" rel="stylesheet">
-    <link href="~/Scripts/jquery-3.7.1.js" rel="stylesheet" />
+    <link href="~/Scripts/jquery-3.7.1.js" rel="stylesheet" /> 
     <script src="https://code.jquery.com/jquery-3.6.1.js"
             integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+    <link href="~/Style/style.css" rel="stylesheet" />
 
     <style>
         * {
@@ -79,6 +81,23 @@
 
         </div>
     </header><!-- End Header -->
+    <button id="myBtn" title="Lên đầu trang"><img src="~/Image/Logo/up-arrow.png" title="lên đầu trang" style="width: 50px" /></button>
+    <script>
+        window.onscroll = function () { scrollFunction() };
+        function scrollFunction() {
+
+            if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+                document.getElementById("myBtn").style.display = "block";
+            } else {
+                document.getElementById("myBtn").style.display = "none";
+            }
+        }
+
+        document.getElementById('myBtn').addEventListener("click", function () {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        });
+    </script>
 
     <div class="row pt-5" style="background-color: #f3f8fa; padding-left: 200px; padding-right: 200px; margin-top: 80px">
         <div class="col-12 d-flex justify-content-center">
@@ -167,83 +186,90 @@
         </footer>*@
 
     <!-- ======= Footer ======= -->
-    <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500" style="background-color: black">
+<footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500" style="background-color: black">
 
-        <div class="footer-newsletter">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <h4>Gửi phản hồi cho chúng tôi</h4>
-                        <p>Ý kiến phản hồi của bạn giúp chúng tôi cải thiện dịch vụ cho khách hàng một cách tốt nhất</p>
-                    </div>
-                    <div class="col-lg-6">
-                        <form action="" method="post">
-                            <input type="email" name="email"><input type="submit" value="Gửi">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 footer-contact">
-
-                        <div class="logo">
-                            <h1 class="text-light"><a href="/home/index"><span>Moderna</span></a></h1>
-                            <!-- Uncomment below if you prefer to use an image logo -->
-                            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Liên kết của chúng tôi</h4>
-                        <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="/home/index">Trang chủ</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="/home/tatcaphong">Khách sạn</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="/phong/index?id=PH_5">Đặt trước</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Liên hệ</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 footer-contact">
-                        <h4>Liên hệ</h4>
-                        <p>
-                            140 Lê Trọng Tấn, Phường Tây Thạnh, Quận Tân Phú, TP.HCM<br><br>
-                            <strong>Phone:</strong> 0905.034.999<br>
-                            <strong>Email:</strong> modernaresort@gmail.com<br>
-                        </p>
-
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 footer-info">
-                        <h3>Về chúng tôi Moderna Resort</h3>
-                        <p>Moderna Resort, còn được biết đến với tên gọi Royal Albatros Moderna, là một khu nghỉ dưỡng tuyệt vời tọa lạc tại Nabq Bay, Sharm El Sheikh, Ai Cập.</p>
-                        <div class="social-links mt-3">
-                            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
+    <div class="footer-newsletter">
         <div class="container">
-            <div class="copyright">
-                &copy; Copyright <strong><span>Moderna</span></strong>. All Rights Reserved
-            </div>
-            <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            <div class="row">
+                <div class="col-lg-6">
+                    <h4>Gửi phản hồi cho chúng tôi</h4>
+                    <p>Ý kiến phản hồi của bạn giúp chúng tôi cải thiện dịch vụ cho khách hàng một cách tốt nhất</p>
+                </div>
+                <div class="col-lg-6">
+                    <form action="" method="post">
+                        <input type="email" name="email"><input type="submit" value="Gửi">
+                    </form>
+                </div>
             </div>
         </div>
-    </footer><!-- End Footer -->
+    </div>
+
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 footer-contact">
+
+                    <div class="logo">
+                        <h1 class="text-light text-center"><a href="/home/index"><span>Moderna</span></a></h1>
+                        <!-- Uncomment below if you prefer to use an image logo -->
+                        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col col-md-12 ">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15676.22772471038!2d106.61853465898766!3d10.806951723984607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752be27d8b4f4d%3A0x92dcba2950430867!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBUaMawxqFuZyBUUC4gSOG7kyBDaMOtIE1pbmg!5e0!3m2!1svi!2s!4v1703259010506!5m2!1svi!2s"
+                                    width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Liên kết của chúng tôi</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/home/index">Trang chủ</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/home/tatcaphong">Khách sạn</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/phong/index?id=PH_5">Đặt trước</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Liên hệ</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-contact">
+                    <h4>Liên hệ</h4>
+                    <p>
+                        140 Lê Trọng Tấn, Phường Tây Thạnh, Quận Tân Phú, TP.HCM<br><br>
+                        <strong>Phone:</strong> 0905.034.999<br>
+                        <strong>Email:</strong> modernaresort@gmail.com<br>
+                    </p>
+
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-info">
+                    <h3>Về chúng tôi Moderna Resort</h3>
+                    <p>Moderna Resort, còn được biết đến với tên gọi Royal Albatros Moderna, là một khu nghỉ dưỡng tuyệt vời tọa lạc tại Nabq Bay, Sharm El Sheikh, Ai Cập.</p>
+                    <div class="social-links mt-3">
+                        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong><span>Moderna</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            <!-- All the links in the footer should remain intact. -->
+            <!-- You can delete the links only if you purchased the pro version. -->
+            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/ -->
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+    </div>
+
+</footer><!-- End Footer -->
     <!-- Vendor JS Files -->
     <script src="~/assets/vendor/purecounter/purecounter_vanilla.js"></script>
     <script src="~/assets/vendor/aos/aos.js"></script>
