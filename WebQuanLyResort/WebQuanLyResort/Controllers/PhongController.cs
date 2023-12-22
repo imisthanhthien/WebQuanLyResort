@@ -59,11 +59,23 @@ namespace WebQuanLyResort.Controllers
                 }
                 else
                 {
-                    List<khachhang> lastKH = db.khachhangs.OrderBy(row => row.id_khachhang.Length).ToList();
-                    string idkhachhang = lastKH.Last().id_khachhang;
+                    //List<khachhang> lastKH = db.khachhangs.OrderBy(row => row.id_khachhang.Substring(3)).ToList();
+                    //string idkhachhang = lastKH.Last().id_khachhang;
+
+                    List<khachhang> khachhangsFromDB = db.khachhangs
+                        .Where(row => row.id_khachhang.StartsWith("KH_"))
+                        .ToList(); // Lấy dữ liệu từ cơ sở dữ liệu
+
+                    List<khachhang> lastKH = khachhangsFromDB
+                        .OrderByDescending(row => int.Parse(row.id_khachhang.Substring(3))) // Sắp xếp theo số sau "KH_" giảm dần
+                        .ToList();
+
+                    string idkhachhang = lastKH.FirstOrDefault()?.id_khachhang; // Lấy id_khachhang của phần tử đầu tiên trong danh sách
+
+
 
                     // Tách phần số từ mã khách hàng hiện tại
-                    string numberPart = idkhachhang.Replace("KH_", ""); // Loại bỏ phần "KH_"
+                    string numberPart = idkhachhang.Replace("KH_", ""); 
 
                     // Chuyển phần số thành giá trị số nguyên
                     if (int.TryParse(numberPart, out int number))
@@ -87,6 +99,8 @@ namespace WebQuanLyResort.Controllers
                     db.khachhangs.Add(khach);
                     db.SaveChanges();
 
+                    string date = kh.ngay_sinh.ToString("dd/MM/yyyy");
+                    ViewBag.date = kh.ngay_sinh;
                     ViewBag.khachhang = khach;
                     return View(booking);
                 }
@@ -102,8 +116,18 @@ namespace WebQuanLyResort.Controllers
         public ActionResult DatPhong(khachhang k, datphong dt)
         {
 
-            List<datphong> lastDatPhong = db.datphongs.OrderBy(row => row.id_datphong.Length).ToList();
-            string iddatphong = lastDatPhong.Last().id_datphong;
+            //List<datphong> lastDatPhong = db.datphongs.OrderBy(row => row.id_datphong.Length).ToList();
+            //string iddatphong = lastDatPhong.Last().id_datphong;
+
+            List<datphong> lastDatPhong = db.datphongs
+                       .Where(row => row.id_datphong.StartsWith("DT_"))
+                       .ToList(); // Lấy dữ liệu từ cơ sở dữ liệu
+
+            List<datphong> lastDT = lastDatPhong
+                .OrderByDescending(row => int.Parse(row.id_datphong.Substring(3))) // Sắp xếp theo số sau "KH_" giảm dần
+                .ToList();
+
+            string iddatphong = lastDT.FirstOrDefault()?.id_datphong; // Lấy id_khachhang của phần tử đầu tiên trong danh sách
             // Tách phần số từ mã khách hàng hiện tại
             string numberPhong = iddatphong.Replace("DT_", ""); // Loại bỏ phần "KH_"
 

@@ -12,6 +12,6 @@ namespace WebQuanLyResort.Identity
         public string CCCD { get; set; }
         public string Gmail { get; set; }
         public string Address { get; set; }
-
+        public string HoTenUser { get; set; }
     }
 }
