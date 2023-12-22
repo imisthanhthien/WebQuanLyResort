@@ -5,23 +5,31 @@
     Layout = "~/Views/Shared/_LayoutPageChiTiet.cshtml";
 }
 
-<div class="d-flex justify-content-center" style="margin-top: 80px">
-    <h1 style="font-weight: 700">Đăng Nhập</h1>
-</div>
+
 
 @using (Html.BeginForm("Login", "Account", FormMethod.Post))
 {
-    <div class="row w-25 mx-auto">
 
-        <div class="col-12 d-flex flex-column justify-content-center" style="padding-left: 100px">
-            @Html.LabelFor(temp => temp.Username, "Tài Khoản", new { @class = "mb-3 mt-2" })
-            @Html.TextBoxFor(temp => temp.Username, new { placeholder = "Username", @class = "form-control" })
-            @Html.ValidationMessageFor(temp => temp.Username)
+<section class="bg-image"
+         style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');height: 700px">
+    <div class="row w-25 mx-auto pt-5 pb-3 bg-white" style="padding-left: 80px; margin-top: 80px; padding-right: 80px; border-radius: 10px;">
+
+        <div class="d-flex justify-content-center">
+            <h1 style="font-weight: 700">Đăng Nhập</h1>
         </div>
-        <div class="col-12" style="padding-left: 100px">
-            @Html.LabelFor(temp => temp.Password, "Mật Khẩu", new { @class = "mb-3 mt-2" })
-            @Html.PasswordFor(temp => temp.Password, new { placeholder = "Password", @class = "form-control" })
-            @Html.ValidationMessageFor(temp => temp.Password)
+        <div class="col-md-12" ">
+            <div class="row p-2">
+                @Html.LabelFor(temp => temp.Username, "Tài Khoản", new { @class = "mb-3 mt-2" })
+                @Html.TextBoxFor(temp => temp.Username, new { placeholder = "Username", @class = "form-control" })
+                @Html.ValidationMessageFor(temp => temp.Username)
+            </div>
+        </div>
+        <div class="col-md-12" ">
+            <div class="row p-2">
+                @Html.LabelFor(temp => temp.Password, "Mật Khẩu", new { @class = "mb-3 mt-2" })
+                @Html.PasswordFor(temp => temp.Password, new { placeholder = "Password", @class = "form-control" })
+                @Html.ValidationMessageFor(temp => temp.Password)
+            </div>
         </div>
         <div class="col-12">
             @Html.ValidationSummary()
@@ -29,6 +37,8 @@
         <div class="col-md-12 d-flex justify-content-center">
             <button type="submit" class="btn btn-dark mt-3 mb-3">Đăng Nhập</button>
         </div>
-        <div class="mb-3" style="padding-left: 100px">Không phải là thành viên? <a class="link-primary" href="/account/register">Đăng ký</a></div>
+        <div class="mb-3 d-flex justify-content-center mt-3">Bạn chưa có tài khoản? <a class="link-primary" href="/account/register">Đăng ký</a></div>
     </div>
+</section>
+
 }

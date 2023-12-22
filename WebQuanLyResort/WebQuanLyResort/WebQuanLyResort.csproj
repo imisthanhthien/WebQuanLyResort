@@ -287,6 +287,7 @@
     <Content Include="Image\Logo\DV2.png" />
     <Content Include="Image\Logo\DV3.png" />
     <Content Include="Image\Logo\Logo.jpg" />
+    <Content Include="Image\Logo\up-arrow.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -331,6 +332,7 @@
     <Content Include="Scripts\jquery-3.7.1.min.js" />
     <Content Include="Scripts\jquery-3.7.1.slim.js" />
     <Content Include="Scripts\jquery-3.7.1.slim.min.js" />
+    <Content Include="Style\style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
