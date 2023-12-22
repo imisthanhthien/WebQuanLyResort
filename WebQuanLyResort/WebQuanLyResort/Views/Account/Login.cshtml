@@ -12,7 +12,7 @@
 @using (Html.BeginForm("Login", "Account", FormMethod.Post))
 {
     <div class="row w-25 mx-auto">
-        
+
         <div class="col-12 d-flex flex-column justify-content-center" style="padding-left: 100px">
             @Html.LabelFor(temp => temp.Username, "Tài Khoản", new { @class = "mb-3 mt-2" })
             @Html.TextBoxFor(temp => temp.Username, new { placeholder = "Username", @class = "form-control" })
@@ -30,4 +30,5 @@
             <button type="submit" class="btn btn-dark mt-3 mb-3">Đăng Nhập</button>
         </div>
         <div class="mb-3" style="padding-left: 100px">Không phải là thành viên? <a class="link-primary" href="/account/register">Đăng ký</a></div>
-    </div>}
+    </div>
+}

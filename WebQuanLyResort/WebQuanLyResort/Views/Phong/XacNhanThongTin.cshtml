@@ -23,7 +23,7 @@
                     <div class="col-md-6">
                         <label for="ngay_sinh">Ngày sinh</label>
                         <input class="form-control" type="text" name="ngay_sinh" id="ngay_sinh" value="@ViewBag.date" disabled />
-                        <input class="form-control d-none" type="text" name="ngay_sinh" id="ngay_sinh" value="@ViewBag.date" />
+<input class="form-control d-none" type="text" name="ngay_sinh" id="ngay_sinh" value="@ViewBag.date" />
                     </div>
                 </div>
 
@@ -64,26 +64,26 @@
             <script>
                 // Kiểm tra ràng buộc ngày sinh phải đủ 18 tuổi
                 document.getElementById('ngay_sinh').addEventListener('change', function () {
-                    var dob = new Date(this.value);
-                    var today = new Date();
-                    var age = today.getFullYear() - dob.getFullYear();
-                    var monthDiff = today.getMonth() - dob.getMonth();
-                    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
-                        age--;
-                    }
-                    if (age < 18) {
-                        alert('Khách hàng phải đủ 18 tuổi trở lên.');
-                        this.value = ''; // Xóa ngày sinh nếu không đủ tuổi
-                    }
-                });
+                            var dob = new Date(this.value);
+                            var today = new Date();
+                            var age = today.getFullYear() - dob.getFullYear();
+                            var monthDiff = today.getMonth() - dob.getMonth();
+                            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+                                age--;
+                            }
+                            if (age < 18) {
+                                alert('Khách hàng phải đủ 18 tuổi trở lên.');
+                                this.value = ''; // Xóa ngày sinh nếu không đủ tuổi
+                            }
+                        });
 
                 // Kiểm tra ràng buộc số điện thoại phải đủ 10 số
                 document.getElementById('sdt').addEventListener('change', function () {
-                    if (this.value.length !== 10) {
-                        alert('Số điện thoại phải đủ 10 số.');
-                        this.value = ''; // Xóa số điện thoại nếu không đủ độ dài
-                    }
-                });
+                            if (this.value.length !== 10) {
+                                alert('Số điện thoại phải đủ 10 số.');
+                                this.value = ''; // Xóa số điện thoại nếu không đủ độ dài
+                            }
+                        });
             </script>
 
             <div class="col-md-3 mt-3">

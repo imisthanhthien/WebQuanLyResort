@@ -68,7 +68,9 @@ namespace WebQuanLyResort.Controllers
                     BirthDay = rvm.DateOfBirth,
                     CCCD = rvm.Cccd,
                     Address = rvm.Address,
-                    PhoneNumber = rvm.Mobile
+                    PhoneNumber = rvm.Mobile,
+                    HoTenUser = rvm.HoTen
+                    
                 };
                 IdentityResult identityResult = userManager.Create(user);
                 if (identityResult.Succeeded)

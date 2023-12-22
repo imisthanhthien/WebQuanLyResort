@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="ten_khachhang">Họ tên</label>
-                        <input class="form-control" type="text" name="ten_khachhang" id="ten_khachhang" value="@ViewBag.user.UserName" />
+                        <input class="form-control" type="text" name="ten_khachhang" id="ten_khachhang" value="@ViewBag.user.HoTenUser" />
                     </div>
                     <div class="col-md-6">
                         <label for="ngay_sinh">Ngày sinh</label>
@@ -108,7 +108,7 @@
                     <hr />
                     <div class="row">
                         <div class="col-md-6">
-                            <p>@Model.tenphong</p>
+                            <h5>@Model.tenphong</h5>
                             <p>TỪ NGÀY: @Model.CheckInDate.ToString("dd/MM/yyyy")</p>
                             <input class="d-none" type="text" name="CheckInDate" id="CheckInDate" value="@Model.CheckInDate" />
                             <input class="d-none" type="text" name="ngaydat" value="@Model.CheckInDate" />
@@ -160,7 +160,7 @@
 </div>
 <script>
     function checkInputs() {
-        var tenKhachHang = document.getElementById('ten_khachhang').value.trim();
+        //var tenKhachHang = document.getElementById('ten_khachhang').value.trim();
         var ngaySinh = document.getElementById('ngay_sinh').value.trim();
         var diaChi = document.getElementById('dia_chi').value.trim();
         var sdt = document.getElementById('sdt').value.trim();
@@ -169,7 +169,7 @@
 
         var submitButton = document.querySelector('.btn.btn-warning.text-white');
 
-        if (tenKhachHang !== '' && ngaySinh !== '' && diaChi !== '' && sdt !== '' && cmnd !== '' && email !== '') {
+        if (/*tenKhachHang !== '' &&*/ ngaySinh !== '' && diaChi !== '' && sdt !== '' && cmnd !== '' && email !== '') {
             submitButton.removeAttribute('disabled');
         } else {
             submitButton.setAttribute('disabled', 'disabled');

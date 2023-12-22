@@ -17,6 +17,11 @@
         @Html.ValidationMessageFor(temp => temp.Username)
     </div>
     <div class="col-md-12">
+        @Html.LabelFor(temp => temp.HoTen, "Họ tên")
+        @Html.TextBoxFor(temp => temp.HoTen, new { placeholder = "HoTen", @class = "form-control mt-2 mb-2" })
+        @Html.ValidationMessageFor(temp => temp.HoTen)
+    </div>
+    <div class="col-md-12">
         @Html.LabelFor(temp => temp.Email)
         @Html.TextBoxFor(temp => temp.Email, new { placeholder = "Email", @class = "form-control mt-2 mb-2" })
         @Html.ValidationMessageFor(temp => temp.Email)
@@ -28,12 +33,12 @@
     </div>
     <div class="col-md-12">
         @Html.LabelFor(temp => temp.Mobile)
-        @Html.TextBoxFor(temp => temp.Mobile, new { placeholder = "Mobile", @class = "form-control mt-2 mb-2" })
+        @Html.TextBoxFor(temp => temp.Mobile, new { placeholder = "Số điện thoại", @class = "form-control mt-2 mb-2" })
         @Html.ValidationMessageFor(temp => temp.Mobile)
     </div>
     <div class="col-md-12">
         <label for="DateOfBirth" class="form-label">Ngày sinh</label>
-        <input type="date" id="DateOfBirth" name="DateOfBirth" class="form-control mt-2 mb-2" >
+        <input type="date" id="DateOfBirth" name="DateOfBirth" class="form-control mt-2 mb-2">
     </div>
 
     <div class="col-md-12">
