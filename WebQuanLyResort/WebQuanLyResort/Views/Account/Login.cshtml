@@ -15,19 +15,19 @@
     <div class="row w-25 mx-auto pt-5 pb-3 bg-white" style="padding-left: 80px; margin-top: 80px; padding-right: 80px; border-radius: 10px;">
 
         <div class="d-flex justify-content-center">
-            <h1 style="font-weight: 700">Đăng Nhập</h1>
+            <h1 style="font-weight: 700">ĐĂNG NHẬP</h1>
         </div>
         <div class="col-md-12" ">
             <div class="row p-2">
-                @Html.LabelFor(temp => temp.Username, "Tài Khoản", new { @class = "mb-3 mt-2" })
-                @Html.TextBoxFor(temp => temp.Username, new { placeholder = "Username", @class = "form-control" })
+                @Html.LabelFor(temp => temp.Username, "TÀI KHOẢN", new { @class = "mb-3 mt-2" })
+                @Html.TextBoxFor(temp => temp.Username, new { placeholder = "Tài khoản", @class = "form-control" })
                 @Html.ValidationMessageFor(temp => temp.Username)
             </div>
         </div>
         <div class="col-md-12" ">
             <div class="row p-2">
-                @Html.LabelFor(temp => temp.Password, "Mật Khẩu", new { @class = "mb-3 mt-2" })
-                @Html.PasswordFor(temp => temp.Password, new { placeholder = "Password", @class = "form-control" })
+                @Html.LabelFor(temp => temp.Password, "MẬT KHẨU", new { @class = "mb-3 mt-2" })
+                @Html.PasswordFor(temp => temp.Password, new { placeholder = "Mật khẩu", @class = "form-control" })
                 @Html.ValidationMessageFor(temp => temp.Password)
             </div>
         </div>
@@ -35,9 +35,9 @@
             @Html.ValidationSummary()
         </div>
         <div class="col-md-12 d-flex justify-content-center">
-            <button type="submit" class="btn btn-dark mt-3 mb-3">Đăng Nhập</button>
+            <button type="submit" class="btn btn-success mt-3 mb-3">Đăng Nhập</button>
         </div>
-        <div class="mb-3 d-flex justify-content-center mt-3">Bạn chưa có tài khoản? <a class="link-primary" href="/account/register">Đăng ký</a></div>
+        <div class="mb-3 d-flex justify-content-center mt-3">Bạn chưa có tài khoản? <a class="link-primary" href="/account/register"> Đăng ký</a></div>
     </div>
 </section>
 

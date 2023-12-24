@@ -46,6 +46,123 @@
             overflow-x: hidden;
             font-family: 'Noto Serif', serif;
         }
+        .logo img,
+        .logo h1 {
+            display: inline-block;
+            vertical-align: middle; /* Tùy chỉnh căn giữa nếu cần */
+        }
+        #dlgContact {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 999;
+        }
+
+        #dlgContact {
+            width: 400px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        #bando {
+            display: none;
+        }
+
+        #clickbandoan {
+            display: none;
+        }
+        /* Định dạng cho tiêu đề của dialog */
+        #dlgContact .page-top > div {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Định dạng cho nội dung chi tiết của dialog */
+        #dlgContact .page-top p {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        /* Định dạng cho các liên kết */
+        #dlgContact a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+            #dlgContact a:hover {
+                text-decoration: underline;
+            }
+
+        #dlgContact {
+            width: 80%;
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 0 auto;
+            font-family: Arial, sans-serif;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 0px;
+            color: #333;
+        }
+
+        .page-top {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+            .page-top:last-child {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+
+        .contact-info {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .contact-label {
+            font-weight: bold;
+            margin-right: 5px;
+            color: #333;
+        }
+
+        .note {
+            font-style: italic;
+            color: #777;
+        }
+
+        .map-link {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+            .map-link:hover {
+                text-decoration: underline;
+            }
+
+        .social-link a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+            .social-link a:hover {
+                text-decoration: underline;
+            }
     </style>
 
 </head>
@@ -54,16 +171,15 @@
         <div class="container d-flex justify-content-between align-items-center">
 
             <div class="logo">
-                <h1 class="text-light"><a href="/home/index"><span>Moderna</span></a></h1>
-                <!-- Uncomment below if you prefer to use an image logo -->
-                <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+                <img src="~/Image/Logo/logoshop.png" />
+                <h1 class="text-light pt-2"><a href="/home/index"><span>Moderna</span></a></h1>
             </div>
 
             <nav id="navbar" class="navbar">
                 <ul class="text-uppercase">
-                    <li><a class="active " href="/home/index">Trang chủ</a></li>
+                    <li><a class="active" href="/home/index">Trang chủ</a></li>
                     <li><a href="/home/tatcaphong">Resort</a></li>
-                    <li><a href="#">Liên hệ</a></li>
+                    <li><a id="contact" href="#">Liên hệ</a></li>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li><a href="/home/lichsudatphong?username=@User.Identity.Name">Lịch sử đặt phòng</a></li>
@@ -82,6 +198,88 @@
         </div>
     </header><!-- End Header -->
     <button id="myBtn" title="Lên đầu trang"><img src="~/Image/Logo/up-arrow.png" title="lên đầu trang" style="width: 50px" /></button>
+
+    <div class="snippet dialog ui-dialog-content ui-widget-content" id="dlgContact" style="width: auto; min-height: 100px; max-height: none; height: auto;">
+        <div class="dialog-content">
+            <div class="form dialog-contact">
+                <div class="page-top">
+
+                    <h3 class="section-title">THÔNG TIN LIÊN HỆ</h3>
+                    <p>
+                        <span class="contact-info">
+                            <span class="contact-label">TỔNG ĐÀI:</span> 1900 5555 40 - 028 73040 588 - 028 3945 1045<br>
+                            <span class="contact-label">CÁ NHÂN:</span> 0902 012 025 - 0935 039 016<br>
+
+                            <span class="note text-danger">Thời gian hoạt động: Từ 8h30-20h (T2-T6) và 8h30h-17h (T7+CN)</span>
+                        </span>
+                    </p>
+                </div>
+                <div class="page-top">
+                    <h3 class="section-title">ĐỊA CHỈ</h3>
+                    <p class="mt-0">
+                        140 Lê Trọng Tấn, Tây Thạnh, Tân Phú, Thành phố Hồ Chí Minh
+                    </p>
+                    <div class="text-center">
+                        <a id="clickbando" href="#" target="_blank" class="map-link">
+                            Xem bản đồ <i class="fa fa-map-marker" style="font-size: 16px; margin-left: 5px;"></i>
+
+                        </a>
+                    </div>
+                    <div class="w-100 text-center">
+                        <iframe id="bando" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15676.22772471038!2d106.61853465898766!3d10.806951723984607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752be27d8b4f4d%3A0x92dcba2950430867!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBUaMawxqFuZyBUUC4gSOG7kyBDaMOtIE1pbmg!5e0!3m2!1svi!2s!4v1703259010506!5m2!1svi!2s"
+                                width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+
+                    <br />
+
+                    <div class="text-center p-2">
+                        <a id="clickbandoan" href="#" target="_blank" class="map-link text-center">
+                            Ẩn bản đồ <i class="fa fa-map-marker" style="font-size: 16px; margin-left: 5px;"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#clickbando').click(function (e) {
+                e.preventDefault();
+                $('#clickbando').fadeOut();
+                $('#bando').fadeIn();
+                $('#clickbandoan').fadeIn();
+            });
+            $(document).on('click', function (e) {
+                if (!$(e.target).closest('#bando, #clickbando').length) {
+                    $('#bando').fadeOut();
+                    $('#clickbandoan').fadeOut();
+                    $('#clickbando').fadeIn();
+                }
+            });
+        });
+        $(document).ready(function () {
+            $('#clickbandoan').click(function (e) {
+                e.preventDefault();
+                $('#bando').fadeOut();
+                $('#clickbandoan').fadeOut();
+            });
+        });
+        $(document).ready(function () {
+            $('#contact').click(function (e) {
+                e.preventDefault();
+                $('#dlgContact').fadeIn();
+            });
+            $(document).on('click', function (e) {
+                if (!$(e.target).closest('#dlgContact, #contact').length) {
+                    $('#dlgContact').fadeOut();
+                }
+            });
+        });
+    </script>
+
+
     <script>
         window.onscroll = function () { scrollFunction() };
         function scrollFunction() {
@@ -135,142 +333,95 @@
                 <img class="w-100 mt-4" style="height: 400px; box-shadow: 5px 5px 20px 0px lightgray; border-radius: 10px" src="~/Image/Logo/DV1.jpg" alt="Alternate Text" />
             </div>
             <div class="col-4">
-                <img class="w-100" style="height: 450px; box-shadow: 5px 5px 20px 0px lightgray; border-radius: 10px" src="~/Image/Logo/DV2.png" alt="Alternate Text" />
+                <img class="w-100 " style="height: 450px; box-shadow: 5px 5px 20px 0px lightgray; border-radius: 10px" src="~/Image/Logo/DV2.png" alt="Alternate Text" />
             </div>
             <div class="col-4">
                 <img class="w-100 mt-4" style="height: 400px; box-shadow: 5px 5px 20px 0px lightgray; border-radius: 10px" src="~/Image/Logo/DV3.png" alt="Alternate Text" />
             </div>
         </div>
 
-        <div class="d-flex justify-content-center mb-4">
-            <a class="btn btn-outline-warning" href="#">XEM TẤT CẢ DỊCH VỤ</a>
-        </div>
+        @*<div class="d-flex justify-content-center mb-4">
+                <a class="btn btn-outline-warning" href="#">XEM TẤT CẢ DỊCH VỤ</a>
+            </div>*@
     </div>
 
-    <hr />
-    @*<footer class="footer mt-3">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <img class="w-50" src="~/Image/Logo/Logo.jpg" alt="Alternate Text" />
-                    </div>
-                    <div class="col-md-3">
-                        <h5 class="text-uppercase">Thông tin liên hệ</h5>
-                        <ul class="list-unstyled">
-                            <li>Địa chỉ: 15/12 đường Vĩnh Phú 21, QL13, khu phố Trung, Phường Vĩnh Phú, TP. Thuận An, Tỉnh Bình Dương</li>
-                            <li>Điện thoại: 0934061386 - 0903601586</li>
-                            <li>Email: info@phuongnamresort.com</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3">
-                        <h5 class="text-uppercase">Chuyên mục</h5>
-                        <ul class="list-unstyled">
-                            <li><a href="#">Khách sạn & nhà hàng</a></li>
-                            <li><a href="#">Hội nghị & tiệc cưới</a></li>
-                            <li><a href="#">Tin tức & tuyển dụng</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3">
-                        <h5 class="text-uppercase">Mạng xã hội</h5>
-                        <ul class="list-inline">
-                            <li><a href="#" class="fab fa-facebook-f"></a></li>
-                            <li><a href="#" class="fab fa-twitter"></a></li>
-                            <li><a href="#" class="fab fa-instagram"></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <p>© 2023 Phương Nam Resort</p>
-                </div>
-            </div>
-        </footer>*@
 
     <!-- ======= Footer ======= -->
-<footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500" style="background-color: black">
+    <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500" style="background-color: black">
 
-    <div class="footer-newsletter">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <h4>Gửi phản hồi cho chúng tôi</h4>
-                    <p>Ý kiến phản hồi của bạn giúp chúng tôi cải thiện dịch vụ cho khách hàng một cách tốt nhất</p>
-                </div>
-                <div class="col-lg-6">
-                    <form action="" method="post">
-                        <input type="email" name="email"><input type="submit" value="Gửi">
-                    </form>
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h4>Gửi phản hồi cho chúng tôi</h4>
+                        <p>Ý kiến phản hồi của bạn giúp chúng tôi cải thiện dịch vụ cho khách hàng một cách tốt nhất</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <form action="" method="post">
+                            <input type="email" name="email"><input type="submit" value="Gửi">
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="footer-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 footer-contact">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 footer-contact">
 
-                    <div class="logo">
-                        <h1 class="text-light text-center"><a href="/home/index"><span>Moderna</span></a></h1>
-                        <!-- Uncomment below if you prefer to use an image logo -->
-                        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col col-md-12 ">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15676.22772471038!2d106.61853465898766!3d10.806951723984607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752be27d8b4f4d%3A0x92dcba2950430867!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBUaMawxqFuZyBUUC4gSOG7kyBDaMOtIE1pbmg!5e0!3m2!1svi!2s!4v1703259010506!5m2!1svi!2s"
-                                    width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <div class="row ">
+                            <div class="col col-md-12  ">
+                                <iframe class="bx-border-radius" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15676.22772471038!2d106.61853465898766!3d10.806951723984607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752be27d8b4f4d%3A0x92dcba2950430867!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBUaMawxqFuZyBUUC4gSOG7kyBDaMOtIE1pbmg!5e0!3m2!1svi!2s!4v1703259010506!5m2!1svi!2s"
+                                        width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Liên kết của chúng tôi</h4>
-                    <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="/home/index">Trang chủ</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="/home/tatcaphong">Khách sạn</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="/phong/index?id=PH_5">Đặt trước</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Liên hệ</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-6 footer-contact">
-                    <h4>Liên hệ</h4>
-                    <p>
-                        140 Lê Trọng Tấn, Phường Tây Thạnh, Quận Tân Phú, TP.HCM<br><br>
-                        <strong>Phone:</strong> 0905.034.999<br>
-                        <strong>Email:</strong> modernaresort@gmail.com<br>
-                    </p>
-
-                </div>
-
-                <div class="col-lg-3 col-md-6 footer-info">
-                    <h3>Về chúng tôi Moderna Resort</h3>
-                    <p>Moderna Resort, còn được biết đến với tên gọi Royal Albatros Moderna, là một khu nghỉ dưỡng tuyệt vời tọa lạc tại Nabq Bay, Sharm El Sheikh, Ai Cập.</p>
-                    <div class="social-links mt-3">
-                        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Liên kết của chúng tôi</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/home/index">Trang chủ</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/home/tatcaphong">Khách sạn</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/phong/index?id=PH_5">Đặt trước</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Liên hệ</a></li>
+                        </ul>
                     </div>
-                </div>
 
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h4>Liên hệ</h4>
+                        <p>
+                            <strong>  120 Lê Trọng Tấn, Phường 15, quận Tân Phú - Hồ Chí Minh</strong><br />
+                            <strong>Phone:</strong> (08) 3334 4442<br>
+                            <strong>Email:</strong> modernaresort@gmail.com<br>
+                        </p>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-info">
+                        <h3>Về chúng tôi Moderna Resort</h3>
+                        <p>Moderna Resort, còn được biết đến với tên gọi Royal Albatros Moderna, là một khu nghỉ dưỡng tuyệt vời tọa lạc tại Nabq Bay, Sharm El Sheikh, Ai Cập.</p>
+                        <div class="social-links mt-3">
+                            <a href="https://twitter.com/" class="twitter"><i class="bx bxl-twitter"></i></a>
+                            <a href="https://www.facebook.com/" class="facebook"><i class="bx bxl-facebook"></i></a>
+                            <a href="https://www.instagram.com/" class="instagram"><i class="bx bxl-instagram"></i></a>
+                            <a href="https://vn.linkedin.com/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="container">
-        <div class="copyright">
-            &copy; Copyright <strong><span>Moderna</span></strong>. All Rights Reserved
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Moderna</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Designed by <a href="#">Moderna</a>
+            </div>
         </div>
-        <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/ -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-        </div>
-    </div>
 
-</footer><!-- End Footer -->
-    <!-- Vendor JS Files -->
+    </footer>
     <script src="~/assets/vendor/purecounter/purecounter_vanilla.js"></script>
     <script src="~/assets/vendor/aos/aos.js"></script>
     <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -280,7 +431,6 @@
     <script src="~/assets/vendor/waypoints/noframework.waypoints.js"></script>
     <script src="~/assets/vendor/php-email-form/validate.js"></script>
 
-    <!-- Template Main JS File -->
     <script src="~/assets/js/main.js"></script>
 </body>
 </html>

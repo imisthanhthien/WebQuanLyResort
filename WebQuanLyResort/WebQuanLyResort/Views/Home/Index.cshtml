@@ -18,10 +18,11 @@
                             <img src="~/Image/HinhAnh/@item.HinhAnh.Trim()" class="img-fluid" alt="Phòng Phương Nam Suite">
                         </div>
                         <div class="col-md-6">
-                            <h2 class="text-success">@item.loaiphong.ten_loai</h2>
-                            <p style="color: #bb8102">Giá: @item.loaiphong.gia.ToString("C")</p>
+
+                            <h2 class="text-primary">@item.loaiphong.ten_loai</h2>
+                            <p style="color: #ff0000; font-size:22px">Giá: @item.loaiphong.gia.ToString("C")</p>
                             <p style="height: 120px">@item.MoTa</p>
-                            <a href="/phong/index?id=@item.id_phong" class="btn btn-primary">ĐẶT TRƯỚC</a>
+                            <a href="/phong/index?id=@item.id_phong" class="btn btn-info text-white">ĐẶT TRƯỚC</a>
                             <a href="/phong/index?id=@item.id_phong" class="btn btn-outline-danger">XEM THÊM</a>
                         </div>
                     </div>

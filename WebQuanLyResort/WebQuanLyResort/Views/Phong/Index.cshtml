@@ -169,7 +169,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center mt-3">
-                        <button type="submit" class="btn btn-warning w-100" href="#">Đặt phòng</button>
+                        <button type="submit" class="btn btn-warning w-100 text-white" href="#">ĐẶT PHÒNG</button>
                     </div>
                     <br />
                 </form>
@@ -336,7 +336,7 @@ else
                     </div>
 
                     <div class="d-flex justify-content-center mt-3">
-                        <button type="submit" class="btn btn-warning w-100" href="#">Đặt phòng</button>
+                        <button type="submit" class="btn btn-warning w-100 text-white" href="#">ĐẶT PHÒNG</button>
                     </div>
                     <br />
                 </form>
@@ -445,8 +445,8 @@ else
                                 <div class="card p-2" style="border-radius: 10px">
                                     <img style="height: 300px; border-radius: 10px" src="~/Image/HinhAnh/@item.HinhAnh.Trim()" alt="Alternate Text" />
                                     <div class="card-body">
-                                        <h4 class="text-success">@item.loaiphong.ten_loai</h4>
-                                        <p>@item.loaiphong.gia.ToString("C")</p>
+                                        <h4 class="text-primary">@item.loaiphong.ten_loai</h4>
+                                        <p style="color: #ff0000; font-size:22px;" >@item.loaiphong.gia.ToString("C")</p>
                                         <div class="row">
                                             <div class="col-6">
                                                 Diện tích
@@ -471,8 +471,8 @@ else
                                                 : @item.so_luong_nguoi khách
                                             </div>
                                         </div>
-                                        <a class="btn btn-warning" href="#">ĐẶT PHÒNG</a>
-                                        <a class="btn btn-outline-warning" href="/phong/index?id=@item.id_phong">XEM CHI TIẾT</a>
+                                        <a class="btn btn-info text-white" href="#">ĐẶT PHÒNG</a>
+                                        <a class="btn btn-outline-danger" href="/phong/index?id=@item.id_phong">XEM CHI TIẾT</a>
                                     </div>
                                 </div>
                             </div>

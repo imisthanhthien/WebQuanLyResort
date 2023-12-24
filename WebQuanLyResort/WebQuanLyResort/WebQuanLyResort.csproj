@@ -136,6 +136,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="%24this.Icon.ico" />
     <Content Include="App_Data\ReSortDb.mdf" />
     <Content Include="App_Data\ReSortDb_log.ldf">
       <DependentUpon>ReSortDb.mdf</DependentUpon>
@@ -283,10 +284,12 @@
     <Content Include="Image\HinhAnh\PH_7.png" />
     <Content Include="Image\HinhAnh\PH_8.png" />
     <Content Include="Image\HinhAnh\PH_9.png" />
+    <Content Include="Image\Icon\tick.png" />
     <Content Include="Image\Logo\DV1.jpg" />
     <Content Include="Image\Logo\DV2.png" />
     <Content Include="Image\Logo\DV3.png" />
     <Content Include="Image\Logo\Logo.jpg" />
+    <Content Include="Image\Logo\logoshop.png" />
     <Content Include="Image\Logo\up-arrow.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -421,6 +424,9 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>%24this.Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

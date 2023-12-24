@@ -4,6 +4,11 @@
     Layout = "~/Views/Shared/_LayoutPageChiTiet.cshtml";
 }
 
+<style>
+    .field-validation-error {
+        color: red;
+    }
+</style>
 
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post))
@@ -11,75 +16,76 @@
 <section class="bg-image"
          style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');height: 1100px">
 
-    <div class="row w-25 mx-auto pt-5 pb-5 bg-white" style="padding-left: 50px; margin-top: 80px; padding-right: 50px; border-radius: 10px;">
+    <div class="row mx-auto pt-5 pb-5 bg-white" style="padding-left: 50px; margin-top: 80px; padding-right: 50px; border-radius: 10px;width: 40%;">
         <div class="d-flex justify-content-center">
-            <h1 style="font-weight: 700">Đăng Ký</h1>
+            <h1 style="font-weight: 700;">THÔNG TIN ĐĂNG KÝ</h1>
         </div>
         <div class="col-md-12">
             <div class="row p-2">
-                @Html.LabelFor(temp => temp.Username, "Tài khoản")
-                @Html.TextBoxFor(temp => temp.Username, new { placeholder = "Username", @class = "form-control mt-2 mb-2" })
-                @Html.ValidationMessageFor(temp => temp.Username)
+                @Html.LabelFor(temp => temp.Username, "TÀI KHOẢN")
+                @Html.TextBoxFor(temp => temp.Username, new { placeholder = "Nhập tài khoản", @class = "form-control mt-2 mb-2" })
+                @Html.ValidationMessageFor(temp => temp.Username, "", new { @class = "field-validation-error" })
             </div>
         </div>
         <div class="col-md-6">
             <div class="row p-2">
-                @Html.LabelFor(temp => temp.HoTen, "Họ tên")
-                @Html.TextBoxFor(temp => temp.HoTen, new { placeholder = "Họ tên", @class = "form-control mt-2 mb-2" })
-                @Html.ValidationMessageFor(temp => temp.HoTen)
+                @Html.LabelFor(temp => temp.HoTen, "HỌ VÀ TÊN")
+                @Html.TextBoxFor(temp => temp.HoTen, new { placeholder = "Nhập họ và tên", @class = "form-control mt-2 mb-2" })
+                @Html.ValidationMessageFor(temp => temp.HoTen, "", new { @class = "field-validation-error" })
             </div>
         </div>
         <div class="col-md-6">
             <div class="row p-2">
-                @Html.LabelFor(temp => temp.Email)
-                @Html.TextBoxFor(temp => temp.Email, new { placeholder = "Email", @class = "form-control mt-2 mb-2" })
-                @Html.ValidationMessageFor(temp => temp.Email)
+                @Html.LabelFor(temp => temp.Email, "EMAIL")
+                @Html.TextBoxFor(temp => temp.Email, new { placeholder = "Nhập email", @class = "form-control mt-2 mb-2" })
+                @Html.ValidationMessageFor(temp => temp.Email, "", new { @class = "field-validation-error" })
             </div>
         </div>
         <div class="col-md-6">
             <div class="row p-2">
-                @Html.LabelFor(temp => temp.Cccd)
-                @Html.TextBoxFor(temp => temp.Cccd, new { placeholder = "Cccd", @class = "form-control mt-2 mb-2" })
-                @Html.ValidationMessageFor(temp => temp.Cccd)
+                @Html.LabelFor(temp => temp.Cccd, "CCCD")
+                @Html.TextBoxFor(temp => temp.Cccd, new { placeholder = "Nhập CCCD", @class = "form-control mt-2 mb-2" })
+                @Html.ValidationMessageFor(temp => temp.Cccd, "", new { @class = "field-validation-error" })
             </div>
         </div>
         <div class="col-md-6">
             <div class="row p-2">
-                @Html.LabelFor(temp => temp.Mobile, "Số điện thoại")
-                @Html.TextBoxFor(temp => temp.Mobile, new { placeholder = "Số điện thoại", @class = "form-control mt-2 mb-2" })
-                @Html.ValidationMessageFor(temp => temp.Mobile)
+                @Html.LabelFor(temp => temp.Mobile, "SỐ ĐIỆN THOẠI")
+                @Html.TextBoxFor(temp => temp.Mobile, new { placeholder = "Nhập số điện thoại", @class = "form-control mt-2 mb-2" })
+                @Html.ValidationMessageFor(temp => temp.Mobile, "", new { @class = "field-validation-error" })
             </div>
         </div>
         <div class="col-md-6">
             <div class="row p-2">
                 <label for="DateOfBirth" class="form-label">Ngày sinh</label>
                 <input type="date" id="DateOfBirth" name="DateOfBirth" class="form-control mt-2 mb-2">
+                @Html.ValidationMessageFor(temp => temp.DateOfBirth, "", new { @class = "field-validation-error" })
             </div>
         </div>
         <div class="col-md-6">
             <div class="row p-2">
-                @Html.LabelFor(temp => temp.Address, "Địa chỉ")
-                @Html.TextBoxFor(temp => temp.Address, new { placeholder = "Địa chỉ", @class = "form-control mt-2 mb-2" })
-                @Html.ValidationMessageFor(temp => temp.Address)
+                @Html.LabelFor(temp => temp.Address, "ĐỊA CHỈ")
+                @Html.TextBoxFor(temp => temp.Address, new { placeholder = "Nhập địa chỉ", @class = "form-control mt-2 mb-2" })
+                @Html.ValidationMessageFor(temp => temp.Address, "", new { @class = "field-validation-error" })
             </div>
         </div>
         <div class="col-md-12">
             <div class="row p-2">
-                @Html.LabelFor(temp => temp.Password, "Mật khẩu")
-                @Html.PasswordFor(temp => temp.Password, new { placeholder = "Mật khẩu", @class = "form-control mt-2 mb-2" })
-                @Html.ValidationMessageFor(temp => temp.Password)
+                @Html.LabelFor(temp => temp.Password, "MẬT KHẨU")
+                @Html.PasswordFor(temp => temp.Password, new { placeholder = "Nhập mật khẩu", @class = "form-control mt-2 mb-2" })
+                @Html.ValidationMessageFor(temp => temp.Password, "", new { @class = "field-validation-error" })
             </div>
         </div>
         <div class="col-md-12">
             <div class="row p-2">
-                @Html.LabelFor(temp => temp.ComfirmPassword, "Xác nhận mật khẩu ")
-                @Html.PasswordFor(temp => temp.ComfirmPassword, new { placeholder = "Mật khẩu xác nhận", @class = "form-control mt-2 mb-2" })
-                @Html.ValidationMessageFor(temp => temp.ComfirmPassword)
+                @Html.LabelFor(temp => temp.ComfirmPassword, "XÁC NHẬN MẬT KHẨU")
+                @Html.PasswordFor(temp => temp.ComfirmPassword, new { placeholder = "Nhập lại mật khẩu", @class = "form-control mt-2 mb-2" })
+                @Html.ValidationMessageFor(temp => temp.ComfirmPassword, "", new { @class = "field-validation-error" })
             </div>
         </div>
 
         <div class="col-md-12 d-flex justify-content-center">
-            <button type="submit" class="btn btn-dark mt-3 mb-3">Đăng Ký</button>
+            <button type="submit" class="btn btn-primary mt-3 mb-3">Đăng Ký</button>
         </div>
     </div>
 
